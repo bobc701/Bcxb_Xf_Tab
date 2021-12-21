@@ -1,3 +1,13 @@
+branch de1
+----------------
+This branch for overhauling Box score so it is in MainPage.
+Overhauling BoxScoreListViewModel.
+
+
+12'21
+-----
+Start Bcxb_Xf_Tab (copied from BcxbXf)
+
 04/13'21
 --------
 Repo: BcxbXf (b2104b)

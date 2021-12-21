@@ -530,7 +530,7 @@
                         
                         <!-- Start box score pitcher stats -->
                         <ListView ItemsSource="{Binding PitcherBoxVis}" SeparatorVisibility="None" SelectionMode="None" 
-                            RowHeight="30" BackgroundColor="Black" Nargin="0">
+                            RowHeight="30" BackgroundColor="Black" Margin="0">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <ViewCell>
