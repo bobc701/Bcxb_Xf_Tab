@@ -1,3 +1,12 @@
+branch dev1.1
+-------------
+There are 2 approaches to box score (being moved to Main Page)
+1. Have separate xaml sections for home & away boxes, and hide or show them when use clicks the tab bar.
+2. Have just a single section in xaml, and switch the binding context when user switches in tab bar
+
+This branch (dev1.1) will go down path #2.
+
+
 branch de1
 ----------------
 This branch for overhauling Box score so it is in MainPage.

@@ -11,7 +11,7 @@ using BCX.BCXB;
 using BCX.BCXCommon;
 using BcxbXf.Views;
 using BcxbDataAccess;
-
+using BcxbXf.Models;
 
 namespace BcxbXf
 {
@@ -53,9 +53,7 @@ namespace BcxbXf
       // -------------------------------------------
          InitializeComponent();
 
-      // Copied from BoxScore page...
-         BindingContext = new BcxbXf.Models.BoxScoreListViewModel();
-
+         BindingContext = new BoxScoreListViewModel("Visitor");
          ViewDidLoad();
          EnableControls();
 
@@ -153,6 +151,7 @@ namespace BcxbXf
 
         private void btnHomeBox_Clicked(object sender, EventArgs e)
         {// ----------------------------------------------------------
+            //BindingContext = new BcxbXf.Models.BoxScoreListViewModel(mGame, 1);
             BindingContext = new BcxbXf.Models.BoxScoreListViewModel(mGame, 1);
             btnHomeBox.BackgroundColor = Color.White;
             btnVisBox.BackgroundColor = Color.Gray;
@@ -160,6 +159,7 @@ namespace BcxbXf
 
         private void btnVisBox_Clicked(object sender, EventArgs e)
         {// ---------------------------------------------------------
+            //BindingContext = new BcxbXf.Models.BoxScoreListViewModel(mGame, 0);
             BindingContext = new BcxbXf.Models.BoxScoreListViewModel(mGame, 0);
             btnVisBox.BackgroundColor = Color.White;
             btnHomeBox.BackgroundColor = Color.Gray;
