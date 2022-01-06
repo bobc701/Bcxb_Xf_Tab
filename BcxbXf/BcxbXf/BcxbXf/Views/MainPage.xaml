@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:BcxbXf"
              x:Class="BcxbXf.MainPage"
-             BindingContext="BcxbXf.MainPage.BoxScoreModel"
              NavigationPage.HasNavigationBar="false">
 
     <!--<ContentPage.Padding>
@@ -402,7 +401,7 @@
                 <!--(1) Box score...-->
                     
                 <!-- Start box score -->
-                <StackLayout Padding="0" Spacing="0" BackgroundColor="Black">
+                <StackLayout Padding="0" Spacing="30" BackgroundColor="Black" Grid.Row="0">
 
                     <!-- Start home / visitor tabs -->
                     <Grid Padding="0" BackgroundColor="Black" >
@@ -422,151 +421,159 @@
                         <!-- End home / visitor tabs -->
                     </Grid>
 
-                    <!-- Start box score batter stats -->
-                    <ListView x:Name= "lstBox" ItemsSource="{Binding BatterBox}" SeparatorVisibility="None" SelectionMode="Single"
-                        RowHeight="30" BackgroundColor="Black" Margin="0">
-                        <ListView.HeaderTemplate>
-                            <DataTemplate>
-                            <ViewCell>
-                                <Grid Padding="0" RowSpacing="0" BackgroundColor="Black">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="5*" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
+                    <ScrollView  Orientation="Vertical" VerticalScrollBarVisibility="Always"
+                        >
 
-                                    <Label Margin="0,0,0,0" Text="Batting" TextColor="LightGray"  HorizontalOptions="Start" Grid.Column="0" Style="{StaticResource LabelItem1}" />
-                                    <Label Margin="0,0,0,0" Text="ab"  TextColor="LightGray"  Grid.Column="1" Style="{StaticResource LabelItem1}" />
-                                    <Label Margin="0,0,0,0" Text="r"  TextColor="LightGray"  Grid.Column="2" Style="{StaticResource LabelItem1}" />
-                                    <Label Margin="0,0,0,0" Text="h"  TextColor="LightGray"  Grid.Column="3" Style="{StaticResource LabelItem1}" />
-                                    <Label Margin="0,0,0,0" Text="bi"  TextColor="LightGray"   Grid.Column="4" Style="{StaticResource LabelItem1}" />
-                                    <Label Margin="0,0,0,0" Text="hr"  TextColor="LightGray"  Grid.Column="5" Style="{StaticResource LabelItem1}" />
-                                    <Label Margin="0,0,0,0" Text="bb"  TextColor="LightGray"  Grid.Column="6" Style="{StaticResource LabelItem1}" />
-                                    <Label Margin="0,0,0,0" Text="so"  TextColor="LightGray"  Grid.Column="7" Style="{StaticResource LabelItem1}" />
+                        <StackLayout Orientation="Vertical">
 
-                                </Grid>
+                            <!-- Start box score batter stats -->
+                           <ListView x:Name= "lstBox"
+                               ItemsSource="{Binding BatterBox}" 
+                                SeparatorVisibility= "None" 
+                                SelectionMode="Single"
+                                RowHeight="25"
+                                BackgroundColor="black" 
+                                Margin="0, 0, 30, 0" 
+                                HeightRequest="200"
+                                Header="">
+                                <ListView.HeaderTemplate>
+                                    <DataTemplate>
+                                        <Grid Padding="0" RowSpacing="0" BackgroundColor="Black" HeightRequest="40">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="5*" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="30" />
+                                            </Grid.RowDefinitions>
 
-                            </ViewCell>
-                            </DataTemplate>
+                                            <Label Margin="0,0,0,0" Text="Batting" TextColor="White"  HorizontalOptions="Start" Grid.Column="0" FontAttributes="Bold" Style="{StaticResource LabelItem1}" />
+                                            <Label Margin="0,0,0,0" Text="ab"  TextColor="LightGray"  Grid.Column="1" FontAttributes="Bold" Style="{StaticResource LabelItem1}" />
+                                            <Label Margin="0,0,0,0" Text="r"  TextColor="LightGray"  Grid.Column="2" FontAttributes="Bold" Style="{StaticResource LabelItem1}" />
+                                            <Label Margin="0,0,0,0" Text="h"  TextColor="LightGray"  Grid.Column="3" FontAttributes="Bold" Style="{StaticResource LabelItem1}" />
+                                            <Label Margin="0,0,0,0" Text="bi"  TextColor="LightGray"   Grid.Column="4" FontAttributes="Bold" Style="{StaticResource LabelItem1}" />
+                                            <Label Margin="0,0,0,0" Text="hr"  TextColor="LightGray"  Grid.Column="5" FontAttributes="Bold" Style="{StaticResource LabelItem1}" />
+                                            <Label Margin="0,0,0,0" Text="bb"  TextColor="LightGray"  Grid.Column="6" FontAttributes="Bold" Style="{StaticResource LabelItem1}" />
+                                            <Label Margin="0,0,0,0" Text="so"  TextColor="LightGray"  Grid.Column="7" FontAttributes="Bold" Style="{StaticResource LabelItem1}" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListView.HeaderTemplate>
 
-                        </ListView.HeaderTemplate>
-                            
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <ViewCell>
-                                    <Grid Padding="0" RowSpacing="0" BackgroundColor="Black">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="5*" />
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="*" />
-                                        </Grid.ColumnDefinitions>
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <Grid Padding="0" RowSpacing="0" BackgroundColor="Black">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="5*" />
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="40" />
+                                                </Grid.RowDefinitions>
 
-                                        <Label Margin="0,0,0,0" Text="{Binding BoxName}" HorizontalOptions="Start" Grid.Column="0" Style="{StaticResource LabelItem1}" />
-                                        <Label Margin="0,0,0,0" Text="{Binding Ab}" Grid.Column="1" Style="{StaticResource LabelItem1}" />
-                                        <Label Margin="0,0,0,0" Text="{Binding R}" Grid.Column="2" Style="{StaticResource LabelItem1}" />
-                                        <Label Margin="0,0,0,0" Text="{Binding H}" Grid.Column="3" Style="{StaticResource LabelItem1}" />
-                                        <Label Margin="0,0,0,0" Text="{Binding Bi}" Grid.Column="4" Style="{StaticResource LabelItem1}" />
-                                        <Label Margin="0,0,0,0" Text="{Binding Hr}" Grid.Column="5" Style="{StaticResource LabelItem1}" />
-                                        <Label Margin="0,0,0,0" Text="{Binding Bb}" Grid.Column="6" Style="{StaticResource LabelItem1}" />
-                                        <Label Margin="0,0,0,0" Text="{Binding So}" Grid.Column="7" Style="{StaticResource LabelItem1}" />
+                                                <Label Margin="0,0,0,0" Text="{Binding boxName}" HorizontalOptions="Start" Grid.Column="0" Style="{StaticResource LabelItem1}" />
+                                                <Label Margin="0,0,0,0" Text="{Binding ab}" Grid.Column="1" Style="{StaticResource LabelItem1}" />
+                                                <Label Margin="0,0,0,0" Text="{Binding r}" Grid.Column="2" Style="{StaticResource LabelItem1}" />
+                                                <Label Margin="0,0,0,0" Text="{Binding h}" Grid.Column="3" Style="{StaticResource LabelItem1}" />
+                                                <Label Margin="0,0,0,0" Text="{Binding bi}" Grid.Column="4" Style="{StaticResource LabelItem1}" />
+                                                <Label Margin="0,0,0,0" Text="{Binding hr}" Grid.Column="5" Style="{StaticResource LabelItem1}" />
+                                                <Label Margin="0,0,0,0" Text="{Binding bb}" Grid.Column="6" Style="{StaticResource LabelItem1}" />
+                                                <Label Margin="0,0,0,0" Text="{Binding so}" Grid.Column="7" Style="{StaticResource LabelItem1}" />
 
-                                    </Grid>
+                                            </Grid>
 
-                                </ViewCell>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
 
-                    </ListView>
+                            </ListView>
 
-                    <!-- Start box score pitcher stats -->
-                    <ListView ItemsSource="{Binding PitcherBox}" SeparatorVisibility="None" SelectionMode="None" 
-                        RowHeight="30" BackgroundColor="Black" Margin="0">
+                            <!-- Start box score pitcher stats -->
+                            <ListView ItemsSource="{Binding PitcherBox}" SeparatorVisibility="None" SelectionMode="None" 
+                                RowHeight="25" 
+                                BackgroundColor="Black" 
+                                Margin="0,0,30,0" 
+                                Header="">
 
-                        <ListView.HeaderTemplate>
-                            <DataTemplate>
-                                <ViewCell>
-                                    <Grid Padding="0" RowSpacing="0" BackgroundColor="Black">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="4.5*" />
-                                            <ColumnDefinition Width="1.5*" />
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="*" />
-                                        </Grid.ColumnDefinitions>
+                                <ListView.HeaderTemplate>
+                                    <DataTemplate>
+                                        <Grid Padding="0" RowSpacing="0" BackgroundColor="Black">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="4.5*" />
+                                                <ColumnDefinition Width="1.5*" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                                <!--<ColumnDefinition Width="*" />-->
+                                            </Grid.ColumnDefinitions>
 
-                                        <Label Margin="0,0,0,0" Text="Pitching" TextColor="LightGray"  HorizontalOptions="Start" Grid.Column="0" Style="{StaticResource LabelItem1}" />
-                                        <Label Margin="0,0,0,0" Text="ip"  TextColor="LightGray"  Grid.Column="1" Style="{StaticResource LabelItem1}" />
-                                        <Label Margin="0,0,0,0" Text="h"  TextColor="LightGray"  Grid.Column="2" Style="{StaticResource LabelItem1}" />
-                                        <Label Margin="0,0,0,0" Text="r"  TextColor="LightGray"  Grid.Column="3" Style="{StaticResource LabelItem1}" />
-                                        <Label Margin="0,0,0,0" Text="er"  TextColor="LightGray"   Grid.Column="4" Style="{StaticResource LabelItem1}" />
-                                        <Label Margin="0,0,0,0" Text="so"  TextColor="LightGray"  Grid.Column="5" Style="{StaticResource LabelItem1}" />
-                                        <Label Margin="0,0,0,0" Text="bb"  TextColor="LightGray"  Grid.Column="6" Style="{StaticResource LabelItem1}" />
-                                        <Label Margin="0,0,0,0" Text="hr"  TextColor="LightGray"  Grid.Column="7" Style="{StaticResource LabelItem1}" />
+                                            <Label Margin="0,0,0,0" Text="Pitching" TextColor="LightGray"  HorizontalOptions="Start" Grid.Column="0" HeightRequest="30" Style="{StaticResource LabelItem1}" />
+                                            <Label Margin="0,0,0,0" Text="ip"  TextColor="LightGray"  Grid.Column="1" Style="{StaticResource LabelItem1}" />
+                                            <Label Margin="0,0,0,0" Text="h"  TextColor="LightGray"  Grid.Column="2" Style="{StaticResource LabelItem1}" />
+                                            <Label Margin="0,0,0,0" Text="r"  TextColor="LightGray"  Grid.Column="3" Style="{StaticResource LabelItem1}" />
+                                            <Label Margin="0,0,0,0" Text="er"  TextColor="LightGray"   Grid.Column="4" Style="{StaticResource LabelItem1}" />
+                                            <Label Margin="0,0,0,0" Text="so"  TextColor="LightGray"  Grid.Column="5" Style="{StaticResource LabelItem1}" />
+                                            <Label Margin="0,0,0,0" Text="bb"  TextColor="LightGray"  Grid.Column="6" Style="{StaticResource LabelItem1}" />
+                                            <!--<Label Margin="0,0,0,0" Text="hr"  TextColor="LightGray"  Grid.Column="7" Style="{StaticResource LabelItem1}" />-->
+                                        </Grid>
 
-
-                                    </Grid>
-
-                                </ViewCell>
-                            </DataTemplate>
+                                    </DataTemplate>
 
 
-                        </ListView.HeaderTemplate> 
-                            
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <ViewCell>
-                                    <Grid Padding="0" RowSpacing="0" BackgroundColor="Black">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="4.5*" />
-                                            <ColumnDefinition Width="1.5*" />
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="*" />
-                                        </Grid.ColumnDefinitions>
+                                </ListView.HeaderTemplate>
 
-                                        <Label Margin="0,0,0,0" Text="{Binding BoxName}" HorizontalOptions="Start" Grid.Column="0" Style="{StaticResource LabelItem1}" />
-                                        <Label Margin="0,0,0,0" Text="{Binding IpDisplay}" Grid.Column="1" Style="{StaticResource LabelItem1}" />
-                                        <Label Margin="0,0,0,0" Text="{Binding H}" Grid.Column="2" Style="{StaticResource LabelItem1}" />
-                                        <Label Margin="0,0,0,0" Text="{Binding R}" Grid.Column="3" Style="{StaticResource LabelItem1}" />
-                                        <Label Margin="0,0,0,0" Text="{Binding Er}" Grid.Column="4" Style="{StaticResource LabelItem1}" />
-                                        <Label Margin="0,0,0,0" Text="{Binding So}" Grid.Column="5" Style="{StaticResource LabelItem1}" />
-                                        <Label Margin="0,0,0,0" Text="{Binding Bb}" Grid.Column="6" Style="{StaticResource LabelItem1}" />
-                                        <Label Margin="0,0,0,0" Text="{Binding Hr}" Grid.Column="7" Style="{StaticResource LabelItem1}" />
-                                        <!--<Label Margin="0,0,0,0" Text="Pitcher" HorizontalOptions="Start" Grid.Column="0" Style="{StaticResource LabelItem1}" />
-                                        <Label Margin="0,0,0,0" Text="0" Grid.Column="1" Style="{StaticResource LabelItem1}" />
-                                        <Label Margin="0,0,0,0" Text="0" Grid.Column="2" Style="{StaticResource LabelItem1}" />
-                                        <Label Margin="0,0,0,0" Text="0" Grid.Column="3" Style="{StaticResource LabelItem1}" />
-                                        <Label Margin="0,0,0,0" Text="0" Grid.Column="4" Style="{StaticResource LabelItem1}" />
-                                        <Label Margin="0,0,0,0" Text="0" Grid.Column="5" Style="{StaticResource LabelItem1}" />
-                                        <Label Margin="0,0,0,0" Text="0" Grid.Column="6" Style="{StaticResource LabelItem1}" />
-                                        <Label Margin="0,0,0,0" Text="0" Grid.Column="7" Style="{StaticResource LabelItem1}" />-->
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <Grid Padding="0" RowSpacing="0" BackgroundColor="Black">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="4.5*" />
+                                                    <ColumnDefinition Width="1.5*" />
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
 
-                                    </Grid>
+                                                <Label Margin="0,0,0,0" Text="{Binding boxName}" HorizontalOptions="Start" Grid.Column="0" Style="{StaticResource LabelItem1}" />
+                                                <Label Margin="0,0,0,0" Text="{Binding IpDisplay}" Grid.Column="1" Style="{StaticResource LabelItem1}" />
+                                                <Label Margin="0,0,0,0" Text="{Binding h}" Grid.Column="2" Style="{StaticResource LabelItem1}" />
+                                                <Label Margin="0,0,0,0" Text="{Binding r}" Grid.Column="3" Style="{StaticResource LabelItem1}" />
+                                                <Label Margin="0,0,0,0" Text="{Binding er}" Grid.Column="4" Style="{StaticResource LabelItem1}" />
+                                                <Label Margin="0,0,0,0" Text="{Binding so}" Grid.Column="5" Style="{StaticResource LabelItem1}" />
+                                                <Label Margin="0,0,0,0" Text="{Binding bb}" Grid.Column="6" Style="{StaticResource LabelItem1}" />
+                                                <!--<Label Margin="0,0,0,0" Text="{Binding hr}" Grid.Column="7" Style="{StaticResource LabelItem1}" />-->
 
-                                </ViewCell>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
+                                            </Grid>
 
-                    <!-- End bx score stats -->    
-                    </ListView>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
 
-                <!-- End box score -->
+                                <!-- End bx score stats -->
+                            </ListView>
+
+                            <!-- End box score -->
+                        </StackLayout>
+                        
+                    </ScrollView>
+                        
                 </StackLayout>
 
                 <!--(2) Profile disk-->

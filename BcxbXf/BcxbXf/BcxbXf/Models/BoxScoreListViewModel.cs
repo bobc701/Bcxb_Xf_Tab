@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using BCX.BCXB;
 
@@ -13,6 +14,8 @@ namespace BcxbXf.Models {
         public string TeamName { get; set; }
         public ObservableCollection<CBatBoxSet> BatterBox { get; set; } = new();
         public ObservableCollection<CPitBoxSet> PitcherBox { get; set; } = new();
+
+        private CBatBoxSet _bsTot = new() { boxName = "Total" };
 
       //public CBatBoxSet BatterBoxVis_tot { get; set; }
       //public CBatBoxSet BatterBoxHome_tot { get; set; }
@@ -31,8 +34,7 @@ namespace BcxbXf.Models {
             bs = new() { boxName = $"{teamName} batter {i}", bx = i };
             BatterBox.Add(bs);
          }
-         bs = new() { boxName = "Total" };
-         BatterBox.Add(bs); //This is the totals row for vis team.
+         BatterBox.Add(_bsTot); //This is the totals row for vis team.
 
          CPitBoxSet ps;
          ps = new() { boxName = $"{teamName} pitcher 1", px = 1 };
@@ -41,44 +43,36 @@ namespace BcxbXf.Models {
          TeamName = teamName;
       }
 
-      public BoxScoreListViewModel(CGame g, int side = 0) 
-        {
-        // ------------------------------------------------------
-        // This version of the constructor is for in-game and 
-        // uses mGame and side.
-        // ------------------------------------------------------
+      public void Rebuild(CGame g, int side = 0) 
+      {
          mGame = g;
          CBatter bat;
          CPitcher pit;
          int bx, px;
-         CBatBoxSet bsTot;
 
-         TeamName = mGame.t[0].nick;
+         TeamName = mGame.t[side].nick;
 
-      // Visitor batter box...
-         bsTot = new CBatBoxSet() { boxName = "Total"};
-         for (int i = 1; i <= CGame.SZ_BAT; i++) {
+         // Visitor batter box...
+         _bsTot.Zero();
+         BatterBox.Clear();
+         for (int i = 1; i <= CGame.SZ_BAT-1; i++) {
             bx = g.t[side].xbox[i];
             if (bx == 0) break;
             bat = g.t[side].bat[bx];
             BatterBox.Add(bat.bs);
-            bsTot += bat.bs; //Operator overload! 
+            _bsTot.AddTo(bat.bs); 
          }
-         BatterBox.Add(bsTot); //This is the totals row.
+         BatterBox.Add(_bsTot); //This is the totals row.
 
-      // Visitor pitcher box...
-         for (int i = 1; i <= CGame.SZ_PIT; i++) {
+         // Visitor pitcher box...
+         PitcherBox.Clear();
+         for (int i = 1; i <= CGame.SZ_PIT-1; i++) {
             px = g.t[side].ybox[i];
             if (px == 0) break;
             pit = g.t[side].pit[px];
             pit.ps.boxName = pit.pname2;
             PitcherBox.Add(pit.ps);
          }
-
-
-            //var bs1 = new CBatBoxSet();
-            //foreach (var bs in BatterBoxVis) bsTot = bsTot + bs; //Operator overload!
-            //BatterBoxVis_tot = bsTot;
 
       }
 

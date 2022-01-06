@@ -32,6 +32,8 @@ namespace BcxbXf
       private PlaysPage fPlays { get; set; } = null;
       private OptionsPage fOptions { get; set; } = null;
 
+      private BoxScoreListViewModel _boxModel;
+
       private bool pinchHitter, pinchRunner, nwPitcher;
       //private LineupCardController fLineup;
       //private OptionsController fOptions;
@@ -48,12 +50,17 @@ namespace BcxbXf
       Label[] lblRunner = new Label[4];
       Label[] lblFielder = new Label[10];
 
-
       public MainPage() {
       // -------------------------------------------
          InitializeComponent();
 
-         BindingContext = new BoxScoreListViewModel("Visitor");
+         _boxModel = new BoxScoreListViewModel("Visitor");
+         Debug.WriteLine($"---------------Height: {lstBox.RowHeight}");
+         Debug.WriteLine($"---------------Count:  {_boxModel.BatterBox.Count}");
+
+         //lstBox.HeightRequest = (lstBox.RowHeight * _boxModel.BatterBox.Count) + 100;
+
+         BindingContext = _boxModel;
          ViewDidLoad();
          EnableControls();
 
@@ -82,7 +89,6 @@ namespace BcxbXf
             switch (this.returningFrom) {
 
                case "PickTeamsPage":
-
                   try {
                      for (int i = 0; i <= 1; i++) {
                         if (fPickTeamsPrep?.SelectedTeams[i].Year == 0 &&
@@ -96,7 +102,9 @@ namespace BcxbXf
                      Activity2.IsVisible = true;
                      Activity2.IsRunning = true;
                      await SetupNewGame(fPickTeamsPrep.SelectedTeams);
-                     txtResults.Text =
+                     _boxModel.Rebuild(mGame, 0);
+                     lstBox.HeightRequest = lstBox.RowHeight * (_boxModel.BatterBox.Count + 50);
+                        txtResults.Text =
                         "\nTap 'Mng' above to change starting lineups." +
                         "\nWhen done, tap 'Start' below." +
                         "\n\nMake sure phone is not in silent mode" +
@@ -118,6 +126,8 @@ namespace BcxbXf
                case "LineupCardPage":
                   if (fLineup.pinchHitter || fLineup.pinchRunner) mGame.InitBatter();
                   if (fLineup.fieldingChange) ShowFielders(mGame.fl);
+                  _boxModel.Rebuild(mGame, mGame.ab);
+                  lstBox.HeightRequest = lstBox.RowHeight * (_boxModel.BatterBox.Count + 50);
                   fLineup = null;
                   break;
 
@@ -152,7 +162,8 @@ namespace BcxbXf
         private void btnHomeBox_Clicked(object sender, EventArgs e)
         {// ----------------------------------------------------------
             //BindingContext = new BcxbXf.Models.BoxScoreListViewModel(mGame, 1);
-            BindingContext = new BcxbXf.Models.BoxScoreListViewModel(mGame, 1);
+            _boxModel.Rebuild(mGame, 1);
+            lstBox.HeightRequest = lstBox.RowHeight * (_boxModel.BatterBox.Count +50);
             btnHomeBox.BackgroundColor = Color.White;
             btnVisBox.BackgroundColor = Color.Gray;
         }
@@ -160,7 +171,8 @@ namespace BcxbXf
         private void btnVisBox_Clicked(object sender, EventArgs e)
         {// ---------------------------------------------------------
             //BindingContext = new BcxbXf.Models.BoxScoreListViewModel(mGame, 0);
-            BindingContext = new BcxbXf.Models.BoxScoreListViewModel(mGame, 0);
+            _boxModel.Rebuild(mGame, 0);
+            lstBox.HeightRequest = lstBox.RowHeight * (_boxModel.BatterBox.Count + 50);
             btnVisBox.BackgroundColor = Color.White;
             btnHomeBox.BackgroundColor = Color.Gray;
 
@@ -788,9 +800,9 @@ namespace BcxbXf
 
       async private void btnBoxScore_Clicked(object sender, EventArgs e) {
       // -------------------------------------------------------------
-         var fBoxScore = new BoxScorePage(mGame, 0);
-         returningFrom = "BoxScorePage";
-         await Navigation.PushAsync(fBoxScore);
+         //var fBoxScore = new BoxScorePage(mGame, 0);
+         //returningFrom = "BoxScorePage";
+         //await Navigation.PushAsync(fBoxScore);
 
       }
 

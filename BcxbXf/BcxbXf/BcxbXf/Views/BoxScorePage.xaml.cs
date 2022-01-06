@@ -21,7 +21,7 @@ namespace BcxbXf.Views {
          // ---------------------------------------------------
          InitializeComponent();
          mGame = g;
-         BindingContext = new BoxScoreListViewModel(g, side);
+         //BindingContext = new BoxScoreListViewModel(g, side);
          this.Title = "Box Score";
 
       // This here is for testing...
@@ -35,14 +35,14 @@ namespace BcxbXf.Views {
 
       private void btnHomeBox_Clicked(object sender, EventArgs e) {
       // ----------------------------------------------------------
-         BindingContext = new BoxScoreListViewModel(mGame, 1);
+         //BindingContext = new BoxScoreListViewModel(mGame, 1);
          btnHomeBox.BackgroundColor = Color.White;
          btnVisBox.BackgroundColor = Color.Gray;
       }
 
       private void btnVisBox_Clicked(object sender, EventArgs e) {
       // ---------------------------------------------------------
-         BindingContext = new BoxScoreListViewModel(mGame, 0);
+         //BindingContext = new BoxScoreListViewModel(mGame, 0);
          btnVisBox.BackgroundColor = Color.White;
          btnHomeBox.BackgroundColor = Color.Gray;
 
