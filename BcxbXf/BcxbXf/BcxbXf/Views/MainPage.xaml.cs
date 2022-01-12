@@ -55,8 +55,6 @@ namespace BcxbXf
          InitializeComponent();
 
          _boxModel = new BoxScoreListViewModel("Visitor");
-         Debug.WriteLine($"---------------Height: {lstBox.RowHeight}");
-         Debug.WriteLine($"---------------Count:  {_boxModel.BatterBox.Count}");
 
          //lstBox.HeightRequest = (lstBox.RowHeight * _boxModel.BatterBox.Count) + 100;
 
@@ -103,7 +101,7 @@ namespace BcxbXf
                      Activity2.IsRunning = true;
                      await SetupNewGame(fPickTeamsPrep.SelectedTeams);
                      _boxModel.Rebuild(mGame, 0);
-                     lstBox.HeightRequest = lstBox.RowHeight * (_boxModel.BatterBox.Count + 50);
+                     //lstBox.HeightRequest = lstBox.RowHeight * (_boxModel.BatterBox.Count + 50);
                         txtResults.Text =
                         "\nTap 'Mng' above to change starting lineups." +
                         "\nWhen done, tap 'Start' below." +
@@ -127,7 +125,7 @@ namespace BcxbXf
                   if (fLineup.pinchHitter || fLineup.pinchRunner) mGame.InitBatter();
                   if (fLineup.fieldingChange) ShowFielders(mGame.fl);
                   _boxModel.Rebuild(mGame, mGame.ab);
-                  lstBox.HeightRequest = lstBox.RowHeight * (_boxModel.BatterBox.Count + 50);
+                  //lstBox.HeightRequest = lstBox.RowHeight * (_boxModel.BatterBox.Count + 50);
                   fLineup = null;
                   break;
 
@@ -163,18 +161,18 @@ namespace BcxbXf
         {// ----------------------------------------------------------
             //BindingContext = new BcxbXf.Models.BoxScoreListViewModel(mGame, 1);
             _boxModel.Rebuild(mGame, 1);
-            lstBox.HeightRequest = lstBox.RowHeight * (_boxModel.BatterBox.Count +50);
-            btnHomeBox.BackgroundColor = Color.White;
-            btnVisBox.BackgroundColor = Color.Gray;
+            //lstBox.HeightRequest = lstBox.RowHeight * (_boxModel.BatterBox.Count +50);
+            //btnHomeBox.BackgroundColor = Color.White;
+            //btnVisBox.BackgroundColor = Color.Gray;
         }
 
         private void btnVisBox_Clicked(object sender, EventArgs e)
         {// ---------------------------------------------------------
             //BindingContext = new BcxbXf.Models.BoxScoreListViewModel(mGame, 0);
             _boxModel.Rebuild(mGame, 0);
-            lstBox.HeightRequest = lstBox.RowHeight * (_boxModel.BatterBox.Count + 50);
-            btnVisBox.BackgroundColor = Color.White;
-            btnHomeBox.BackgroundColor = Color.Gray;
+            //lstBox.HeightRequest = lstBox.RowHeight * (_boxModel.BatterBox.Count + 50);
+            //btnVisBox.BackgroundColor = Color.White;
+            //btnHomeBox.BackgroundColor = Color.Gray;
 
         }
 

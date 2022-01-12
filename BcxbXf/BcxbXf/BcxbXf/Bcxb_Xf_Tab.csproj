@@ -87,7 +87,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
     <PackageReference Include="SkiaSharp.Views.Forms" Version="2.80.2" />
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2291" />
   </ItemGroup>
 
   <ItemGroup>
@@ -97,6 +97,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\BcxbLib3\BcxbDataAccess\BcxbDataAccess.csproj" />
     <ProjectReference Include="..\..\..\..\BcxbLib3\BcxbLib_CL4\BcxbLib_CL4.csproj" />
   </ItemGroup>
 

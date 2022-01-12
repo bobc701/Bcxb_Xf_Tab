@@ -11,35 +11,22 @@ namespace BcxbXf.Models {
 
       private CGame mGame;
 
-        public string TeamName { get; set; }
-        public ObservableCollection<CBatBoxSet> BatterBox { get; set; } = new();
-        public ObservableCollection<CPitBoxSet> PitcherBox { get; set; } = new();
+         public string TeamName { get; set; }
+        public ObservableCollection<CBatBoxSet> BatterBoxVis { get; set; } = new();
+        public ObservableCollection<CBatBoxSet> BatterBoxHome { get; set; } = new();
+        public ObservableCollection<CPitBoxSet> PitcherBoxVis { get; set; } = new();
+        public ObservableCollection<CPitBoxSet> PitcherBoxHome { get; set; } = new();
 
-        private CBatBoxSet _bsTot = new() { boxName = "Total" };
+      private CBatBoxSet _bsTot = new() { boxName = "Total" };
 
+      private ObservableCollection<CBatBoxSet> batterBox;
+      private ObservableCollection<CPitBoxSet> pitcherBox;
       //public CBatBoxSet BatterBoxVis_tot { get; set; }
       //public CBatBoxSet BatterBoxHome_tot { get; set; }
-      
+
 
       public BoxScoreListViewModel(string teamName)
       {
-      // -------------------------------------------------------------
-      // This version of the constructor just build a dummy with
-      // 9 batters and 1 pitcher and all 0's, for initial data binding
-      // before a game starts.
-      // -------------------------------------------------------------
-
-         CBatBoxSet bs;
-         for (int i = 1; i <= 9; i++) {
-            bs = new() { boxName = $"{teamName} batter {i}", bx = i };
-            BatterBox.Add(bs);
-         }
-         BatterBox.Add(_bsTot); //This is the totals row for vis team.
-
-         CPitBoxSet ps;
-         ps = new() { boxName = $"{teamName} pitcher 1", px = 1 };
-         PitcherBox.Add(ps);
-
          TeamName = teamName;
       }
 
@@ -49,29 +36,31 @@ namespace BcxbXf.Models {
          CBatter bat;
          CPitcher pit;
          int bx, px;
+         batterBox = side switch { 0 => BatterBoxVis, 1 => BatterBoxHome };
+         pitcherBox = side switch { 0 => PitcherBoxVis, 1 => PitcherBoxHome };
 
          TeamName = mGame.t[side].nick;
 
-         // Visitor batter box...
+         // Batter box...
          _bsTot.Zero();
-         BatterBox.Clear();
+         batterBox.Clear();
          for (int i = 1; i <= CGame.SZ_BAT-1; i++) {
             bx = g.t[side].xbox[i];
             if (bx == 0) break;
             bat = g.t[side].bat[bx];
-            BatterBox.Add(bat.bs);
+            batterBox.Add(bat.bs);
             _bsTot.AddTo(bat.bs); 
          }
-         BatterBox.Add(_bsTot); //This is the totals row.
+         batterBox.Add(_bsTot); //This is the totals row.
 
-         // Visitor pitcher box...
-         PitcherBox.Clear();
+         // Pitcher box...
+         pitcherBox.Clear();
          for (int i = 1; i <= CGame.SZ_PIT-1; i++) {
             px = g.t[side].ybox[i];
             if (px == 0) break;
             pit = g.t[side].pit[px];
             pit.ps.boxName = pit.pname2;
-            PitcherBox.Add(pit.ps);
+            pitcherBox.Add(pit.ps);
          }
 
       }

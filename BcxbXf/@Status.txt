@@ -1,3 +1,15 @@
+branch dev1.2
+-------------
+We will try the 3-tabbed approach to the box score.
+1) Vis batting
+2) Home batting
+3) Pitching (Vis, Home)
+
+So there will be 4 properties of the BoxScoreListViewModel
+Question is will the be 4 ListViews in XAML or just 3 and reuse
+the one for batting for vis and home. Think I will do the latter.
+
+
 branch dev1.1
 -------------
 There are 2 approaches to box score (being moved to Main Page)
