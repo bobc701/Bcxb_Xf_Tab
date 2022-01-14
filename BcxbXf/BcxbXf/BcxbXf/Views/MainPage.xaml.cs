@@ -54,7 +54,7 @@ namespace BcxbXf
       // -------------------------------------------
          InitializeComponent();
 
-         _boxModel = new BoxScoreListViewModel("Visitor");
+         _boxModel = new BoxScoreListViewModel();
 
          //lstBox.HeightRequest = (lstBox.RowHeight * _boxModel.BatterBox.Count) + 100;
 

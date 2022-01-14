@@ -11,7 +11,8 @@ namespace BcxbXf.Models {
 
       private CGame mGame;
 
-         public string TeamName { get; set; }
+        public string VisName { get; set; } = "Vistor";
+        public string HomeName { get; set; } = "Home";
         public ObservableCollection<CBatBoxSet> BatterBoxVis { get; set; } = new();
         public ObservableCollection<CBatBoxSet> BatterBoxHome { get; set; } = new();
         public ObservableCollection<CPitBoxSet> PitcherBoxVis { get; set; } = new();
@@ -25,9 +26,9 @@ namespace BcxbXf.Models {
       //public CBatBoxSet BatterBoxHome_tot { get; set; }
 
 
-      public BoxScoreListViewModel(string teamName)
+      public BoxScoreListViewModel()
       {
-         TeamName = teamName;
+         //TeamName = teamName;
       }
 
       public void Rebuild(CGame g, int side = 0) 
@@ -39,7 +40,8 @@ namespace BcxbXf.Models {
          batterBox = side switch { 0 => BatterBoxVis, 1 => BatterBoxHome };
          pitcherBox = side switch { 0 => PitcherBoxVis, 1 => PitcherBoxHome };
 
-         TeamName = mGame.t[side].nick;
+         if (side == 0) this.VisName = mGame.t[side].nick;
+         else this.HomeName = mGame.t[side].nick;
 
          // Batter box...
          _bsTot.Zero();
