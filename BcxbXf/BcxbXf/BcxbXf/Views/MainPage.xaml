@@ -399,17 +399,15 @@
                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <!--(1) Box score...-->
-                    
             <!-- Start box score -->
-            <!-- Grid elt #1/2 -->
+            <!-- Grid elt #1/2 == Box score stuff -->
             <StackLayout 
-               Padding="0" Spacing="30" 
+               Padding="0" Spacing="10" 
                BackgroundColor="Black" 
                Grid.Row="0">
 
                <!-- StackLayout elt #1 == Start home / visitor tabs -->
-               <Grid Padding="0" BackgroundColor="Black" >
+               <Grid Padding="0" Margin="0" BackgroundColor="Black" >
                   <Grid.ColumnDefinitions>
                      <ColumnDefinition Width="*" />
                      <ColumnDefinition Width="*" />
@@ -419,25 +417,28 @@
                      <RowDefinition Height="30" />
                   </Grid.RowDefinitions>
 
-                  <Button x:Name="btnBatBoxVis"  
+                  <Button 
+                     x:Name="btnBatBoxVis"  
                      Text="{Binding VisName}" 
                      IsEnabled="false"
                      Padding="0" Margin="0" Grid.Column="0" 
                      Clicked="btnVisBox_Clicked" 
                      BackgroundColor="LightGray" TextColor="Black"
                      HorizontalOptions="FillAndExpand"/>
-                  <Button x:Name="btnPitBoxHome" 
+                  <Button 
+                     x:Name="btnBatBoxHome" 
                      Text="{Binding HomeName}" 
                      IsEnabled="False"
                      Padding="0" Margin="0" Grid.Column="1" 
                      Clicked="btnHomeBox_Clicked" 
                      BackgroundColor="LightGray" TextColor="Black"
                      HorizontalOptions="FillAndExpand"/>
-                  <Button x:Name="btnPitBox"  
+                  <Button 
+                     x:Name="btnPitBox"  
                      IsEnabled="False"
                      Text="Pitching" 
                      Padding="0" Margin="0" Grid.Column="2"
-                     Clicked="btnVisBox_Clicked" 
+                     Clicked="btnPitBox_Clicked" 
                      BackgroundColor="LightGray" TextColor="Black"
                      HorizontalOptions="FillAndExpand"/>
 
@@ -447,12 +448,13 @@
                <!-- StackLayout elt #2 == Vis, Home, Pitcher boxes -->
                <StackLayout 
                   Orientation="Vertical"
-                  Padding="30,24,30,24" 
+                  Padding="0,0,0,0" Margin="0"
                   Spacing="10" 
                   IsVisible="true">
 
                   <!--ListView #1 == Batters ===================================== -->
                   <Label 
+                     x:Name="lblBatBoxBoth"
                      Text="Visitor" 
                      FontAttributes="Bold" FontSize="Large" TextColor="White" BackgroundColor="Black"
                      IsVisible="true" />

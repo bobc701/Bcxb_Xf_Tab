@@ -93,16 +93,21 @@ namespace BcxbXf
                             fPickTeamsPrep?.SelectedTeams[1].UserTeamID == 0) return; //User did not pick
                      }
 
-                     Debug.WriteLine("Vititing team: " + fPickTeamsPrep.SelectedTeams[0]);
-                     Debug.WriteLine("Home team: " + fPickTeamsPrep.SelectedTeams[1]);
+                     Debug.WriteLine("In MainPage.Appearing: Vititing team: " + fPickTeamsPrep.SelectedTeams[0]);
+                     Debug.WriteLine("In MainPage.Appearing: Home team: " + fPickTeamsPrep.SelectedTeams[1]);
+
+                     btnBatBoxVis.IsEnabled = true;
+                     btnBatBoxHome.IsEnabled = true;
+                     btnPitBox.IsEnabled = true;
+
+                     _boxModel.Rebuild(mGame, 0);
+                     _boxModel.Rebuild(mGame, 1);
 
                      txtResults.Text = "\nLoading player stats. Please wait..."; //#3000.02... note 'async delegate' above.
                      Activity2.IsVisible = true;
                      Activity2.IsRunning = true;
                      await SetupNewGame(fPickTeamsPrep.SelectedTeams);
-                     _boxModel.Rebuild(mGame, 0);
-                     //lstBox.HeightRequest = lstBox.RowHeight * (_boxModel.BatterBox.Count + 50);
-                        txtResults.Text =
+                     txtResults.Text =
                         "\nTap 'Mng' above to change starting lineups." +
                         "\nWhen done, tap 'Start' below." +
                         "\n\nMake sure phone is not in silent mode" +
@@ -124,7 +129,10 @@ namespace BcxbXf
                case "LineupCardPage":
                   if (fLineup.pinchHitter || fLineup.pinchRunner) mGame.InitBatter();
                   if (fLineup.fieldingChange) ShowFielders(mGame.fl);
+
+                  Debug.WriteLine("In MainPage.Appearing");
                   _boxModel.Rebuild(mGame, mGame.ab);
+
                   //lstBox.HeightRequest = lstBox.RowHeight * (_boxModel.BatterBox.Count + 50);
                   fLineup = null;
                   break;
@@ -157,27 +165,43 @@ namespace BcxbXf
 
      // These 2 handlers copied from BoxScorePage.cs...
 
-        private void btnHomeBox_Clicked(object sender, EventArgs e)
-        {// ----------------------------------------------------------
-            //BindingContext = new BcxbXf.Models.BoxScoreListViewModel(mGame, 1);
-            _boxModel.Rebuild(mGame, 1);
-            //lstBox.HeightRequest = lstBox.RowHeight * (_boxModel.BatterBox.Count +50);
-            //btnHomeBox.BackgroundColor = Color.White;
-            //btnVisBox.BackgroundColor = Color.Gray;
-        }
+      private void btnHomeBox_Clicked(object sender, EventArgs e)
+      {
+         //_boxModel.Rebuild(mGame, 1);
+         lblBatBoxBoth.IsVisible = true; lstBatBoxBoth.IsVisible = true;
+         lblPitBoxVis.IsVisible = false; lstPitBoxVis.IsVisible = false;
+         lblPitBoxHome.IsVisible = false; lstPitBoxHome.IsVisible = false;
 
-        private void btnVisBox_Clicked(object sender, EventArgs e)
-        {// ---------------------------------------------------------
-            //BindingContext = new BcxbXf.Models.BoxScoreListViewModel(mGame, 0);
-            _boxModel.Rebuild(mGame, 0);
-            //lstBox.HeightRequest = lstBox.RowHeight * (_boxModel.BatterBox.Count + 50);
-            //btnVisBox.BackgroundColor = Color.White;
-            //btnHomeBox.BackgroundColor = Color.Gray;
+         lstBatBoxBoth.ItemsSource = _boxModel.BatterBoxHome;
 
-        }
+      }
+
+      private void btnVisBox_Clicked(object sender, EventArgs e)
+      {
+         //_boxModel.Rebuild(mGame, 0);
+         lblBatBoxBoth.IsVisible = true; lstBatBoxBoth.IsVisible = true;
+         lblPitBoxVis.IsVisible = false; lstPitBoxVis.IsVisible = false;
+         lblPitBoxHome.IsVisible = false; lstPitBoxHome.IsVisible = false;
+
+         lstBatBoxBoth.ItemsSource = _boxModel.BatterBoxVis;
+
+      }
+
+      private void btnPitBox_Clicked(object sender, EventArgs e) {
+
+         //_boxModel.Rebuild(mGame, 0);
+         //_boxModel.Rebuild(mGame, 1);
+         lblBatBoxBoth.IsVisible = false; lstBatBoxBoth.IsVisible = false;
+         lblPitBoxVis.IsVisible = true; lstPitBoxVis.IsVisible = true;
+         lblPitBoxHome.IsVisible = true; lstPitBoxHome.IsVisible = true;
+
+         lstPitBoxVis.ItemsSource = _boxModel.PitcherBoxVis;
+         lstPitBoxHome.ItemsSource = _boxModel.PitcherBoxHome;
+
+      }
 
 
-        private void ViewDidLoad() {
+      private void ViewDidLoad() {
          // -------------------------------------------
          //GFileAccess.SetFolders();
          try {

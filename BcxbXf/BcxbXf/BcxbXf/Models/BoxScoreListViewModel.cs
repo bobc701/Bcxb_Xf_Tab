@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using BCX.BCXB;
@@ -29,10 +30,12 @@ namespace BcxbXf.Models {
       public BoxScoreListViewModel()
       {
          //TeamName = teamName;
+         Debug.WriteLine("In BoxScoreListViewModel ctor");
       }
 
       public void Rebuild(CGame g, int side = 0) 
       {
+         Debug.WriteLine($"In Rebuild side={side}");
          mGame = g;
          CBatter bat;
          CPitcher pit;
@@ -65,6 +68,7 @@ namespace BcxbXf.Models {
             pitcherBox.Add(pit.ps);
          }
 
+         Debug.WriteLine($"Leaving Rebuild side={side}, Counts: {batterBox.Count()} {pitcherBox.Count()}");
       }
 
 
