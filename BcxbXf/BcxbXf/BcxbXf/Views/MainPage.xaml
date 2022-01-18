@@ -455,7 +455,7 @@
                   <!--ListView #1 == Batters ===================================== -->
                   <Label 
                      x:Name="lblBatBoxBoth"
-                     Text="Visitor" 
+                     Text="{Binding VisName}"
                      FontAttributes="Bold" FontSize="Large" TextColor="White" BackgroundColor="Black"
                      IsVisible="true" />
                   <ListView 
@@ -532,13 +532,13 @@
                   <!--ListView #2 == Pitchers, Vis ============================ -->
                   <Label x:Name="lblPitBoxVis" 
                      IsVisible="false"
-                     Text="Home" 
+                     Text="{Binding VisName}" 
                      FontAttributes="Bold" FontSize="Large" TextColor="White" BackgroundColor="Black"
                   />
                   <ListView 
                      x:Name= "lstPitBoxVis"
                      ItemsSource="{Binding PitcherBoxVis}" 
-                     SelectionMode="None" 
+                     SelectionMode="Single" 
                      RowHeight="25" 
                      BackgroundColor="Blue"
                      IsVisible="false">
@@ -606,7 +606,7 @@
                   <Label 
                      x:Name="lblPitBoxHome" 
                      IsVisible="false" 
-                     Text="Home" 
+                     Text="{Binding HomeName}" 
                      FontAttributes="Bold" FontSize="Large" TextColor="White" BackgroundColor="Black"
                   />
 
