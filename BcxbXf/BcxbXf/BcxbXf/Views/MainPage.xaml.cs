@@ -56,9 +56,7 @@ namespace BcxbXf
 
          _boxModel = new BoxScoreListViewModel();
 
-         //lstBox.HeightRequest = (lstBox.RowHeight * _boxModel.BatterBox.Count) + 100;
-
-         BindingContext = _boxModel;
+         //BindingContext = _boxModel;
          ViewDidLoad();
          EnableControls();
 
@@ -107,6 +105,10 @@ namespace BcxbXf
 
                      _boxModel.Rebuild(mGame, 0);
                      _boxModel.Rebuild(mGame, 1);
+                     BindingContext = _boxModel;
+                     //lstBatBoxBoth.ItemsSource = _boxModel.BatterBoxVis;
+                     //lstPitBoxVis.ItemsSource = _boxModel.PitcherBoxVis;
+                     //lstPitBoxHome.ItemsSource = _boxModel.PitcherBoxHome;
 
                         txtResults.Text =
                         "\nTap 'Mng' above to change starting lineups." +
@@ -133,6 +135,8 @@ namespace BcxbXf
 
                   Debug.WriteLine("In MainPage.Appearing");
                   _boxModel.Rebuild(mGame, mGame.ab);
+                  _boxModel.Rebuild(mGame, mGame.fl);
+                  BindingContext = _boxModel;
 
                   //lstBox.HeightRequest = lstBox.RowHeight * (_boxModel.BatterBox.Count + 50);
                   fLineup = null;
@@ -168,7 +172,7 @@ namespace BcxbXf
 
       private void btnHomeBox_Clicked(object sender, EventArgs e)
       {
-         _boxModel.Rebuild(mGame, 1);
+         //_boxModel.Rebuild(mGame, 1);
          lstBatBoxBoth.ItemsSource = _boxModel.BatterBoxHome;
 
          lblBatBoxBoth.IsVisible = true; lstBatBoxBoth.IsVisible = true;
@@ -179,7 +183,7 @@ namespace BcxbXf
 
       private void btnVisBox_Clicked(object sender, EventArgs e)
       {
-         _boxModel.Rebuild(mGame, 0);
+         //_boxModel.Rebuild(mGame, 0);
          lstBatBoxBoth.ItemsSource = _boxModel.BatterBoxVis;
 
          lblBatBoxBoth.IsVisible = true; lstBatBoxBoth.IsVisible = true;
@@ -190,8 +194,8 @@ namespace BcxbXf
 
       private void btnPitBox_Clicked(object sender, EventArgs e) {
 
-         _boxModel.Rebuild(mGame, 0);
-         _boxModel.Rebuild(mGame, 1);
+         //_boxModel.Rebuild(mGame, 0);
+         //_boxModel.Rebuild(mGame, 1);
 
          lstPitBoxVis.ItemsSource = _boxModel.PitcherBoxVis;
          lstPitBoxHome.ItemsSource = _boxModel.PitcherBoxHome;

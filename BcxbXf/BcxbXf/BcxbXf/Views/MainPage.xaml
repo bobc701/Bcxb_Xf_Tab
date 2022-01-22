@@ -5,7 +5,7 @@
              x:Class="BcxbXf.MainPage"
              NavigationPage.HasNavigationBar="false">
 
-    <!--<ContentPage.Padding>
+   <!--<ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness">
             <On Platform="iOS" Value="20, 40, 20, 20" />
             <On Platform="Android, WinPhone, Windows" Value="0" />
@@ -450,6 +450,7 @@
                   Orientation="Vertical"
                   Padding="0,0,0,0" Margin="0"
                   Spacing="10" 
+                  BackgroundColor="Black"
                   IsVisible="true">
 
                   <!--ListView #1 == Batters ===================================== -->
@@ -461,9 +462,11 @@
                   <ListView 
                      x:Name= "lstBatBoxBoth"
                      ItemsSource="{Binding BatterBoxVis}" 
-                     SelectionMode="Single"
+                     SelectionMode="None"
                      RowHeight="25"
-                     BackgroundColor="Beige" 
+                     BackgroundColor="Black"
+                     VerticalOptions="Start"
+                     HeightRequest="700"
                      IsVisible="true" >
 
                      <ListView.Header>
@@ -538,16 +541,18 @@
                   <ListView 
                      x:Name= "lstPitBoxVis"
                      ItemsSource="{Binding PitcherBoxVis}" 
-                     SelectionMode="Single" 
+                     SelectionMode="None" 
                      RowHeight="25" 
-                     BackgroundColor="Blue"
+                     HeightRequest="500"
+                     VerticalOptions="StartAndExpand"
+                     BackgroundColor="Black"
                      IsVisible="false">
 
                      <ListView.Header>
 
                         <Grid Padding="0" RowSpacing="0" BackgroundColor="Black">
                            <Grid.ColumnDefinitions>
-                              <ColumnDefinition Width="4.5*" />
+                              <ColumnDefinition Width="4*" />
                               <ColumnDefinition Width="1.5*" />
                               <ColumnDefinition Width="*" />
                               <ColumnDefinition Width="*" />
@@ -574,9 +579,8 @@
                            <ViewCell>
                               <Grid Padding="0" RowSpacing="0" BackgroundColor="Black">
                                  <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="4.5*" />
+                                    <ColumnDefinition Width="4*" />
                                     <ColumnDefinition Width="1.5*" />
-                                    <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="*" />
@@ -615,21 +619,22 @@
                         ItemsSource="{Binding PitcherBoxHome}" 
                         SelectionMode="None" 
                         RowHeight="25" 
-                        BackgroundColor="Blue" 
+                        BackgroundColor="Black" 
+                        VerticalOptions="StartAndExpand"
+                        HeightRequest="500"
                         IsVisible="false">
 
                         <ListView.Header>
 
                         <Grid Padding="0" RowSpacing="0" BackgroundColor="Black">
                            <Grid.ColumnDefinitions>
-                              <ColumnDefinition Width="4.5*" />
+                              <ColumnDefinition Width="4*" />
                               <ColumnDefinition Width="1.5*" />
                               <ColumnDefinition Width="*" />
                               <ColumnDefinition Width="*" />
                               <ColumnDefinition Width="*" />
                               <ColumnDefinition Width="*" />
                               <ColumnDefinition Width="*" />
-                              <!--<ColumnDefinition Width="*" />-->
                            </Grid.ColumnDefinitions>
 
                            <Label Margin="0,0,0,0" Text="Pitching" HorizontalOptions="Start" Grid.Column="0" HeightRequest="30" Style="{StaticResource LabelItem1}" />
@@ -649,9 +654,8 @@
                            <ViewCell>
                               <Grid Padding="0" RowSpacing="0" BackgroundColor="Black">
                                  <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="4.5*" />
+                                    <ColumnDefinition Width="4*" />
                                     <ColumnDefinition Width="1.5*" />
-                                    <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="*" />

@@ -4,19 +4,15 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using BCX.BCXB;
 
 namespace BcxbXf.Models {
 
    public class BoxScoreListViewModel : INotifyPropertyChanged { 
 
-      private CGame mGame;
+      private CGame _mGame;
       private string _VisName = "Visitor", _HomeName = "Home";
-
-      private ObservableCollection<CBatBoxSet> _BatterBoxVis = new();
-      private ObservableCollection<CBatBoxSet> _BatterBoxHome = new();
-      private ObservableCollection<CPitBoxSet> _PitcherBoxVis = new();
-      private ObservableCollection<CPitBoxSet> _PitcherBoxHome = new();
 
       private CBatBoxSet _bsTot = new() { boxName = "Total" };
       private ObservableCollection<CBatBoxSet> batterBox;
@@ -25,30 +21,28 @@ namespace BcxbXf.Models {
 
       public string VisName { get { return _VisName; } set { _VisName = value; OnPropertyChanged(); } }
       public string HomeName { get { return _HomeName; } set { _HomeName = value; OnPropertyChanged(); } }
-      public ObservableCollection<CBatBoxSet> BatterBoxVis { get { return _BatterBoxVis; } set { _BatterBoxVis = value; OnPropertyChanged(); } }
-      public ObservableCollection<CBatBoxSet> BatterBoxHome { get { return _BatterBoxVis; } set { _BatterBoxVis = value; OnPropertyChanged(); } }
-        public ObservableCollection<CPitBoxSet> PitcherBoxVis { get { return _PitcherBoxVis; } set { _PitcherBoxVis = value; OnPropertyChanged(); } }
-      public ObservableCollection<CPitBoxSet> PitcherBoxHome { get { return _PitcherBoxVis; } set { _PitcherBoxVis = value; OnPropertyChanged(); } }
+      public ObservableCollection<CBatBoxSet> BatterBoxVis { get; set; } = new();
+      public ObservableCollection<CBatBoxSet> BatterBoxHome { get; set; } = new();
+      public ObservableCollection<CPitBoxSet> PitcherBoxVis { get; set; } = new();
+      public ObservableCollection<CPitBoxSet> PitcherBoxHome { get; set; } = new();
 
 
       public BoxScoreListViewModel()
       {
-         //TeamName = teamName;
          Debug.WriteLine("In BoxScoreListViewModel ctor");
       }
 
       public void Rebuild(CGame g, int side = 0) 
       {
          Debug.WriteLine($"In Rebuild side={side}");
-         mGame = g;
          CBatter bat;
          CPitcher pit;
          int bx, px;
-         batterBox = side switch { 0 => BatterBoxVis, 1 => BatterBoxHome };
-         pitcherBox = side switch { 0 => PitcherBoxVis, 1 => PitcherBoxHome };
+         batterBox = side switch { 0 => BatterBoxVis, 1 => BatterBoxHome, _ => null };
+         pitcherBox = side switch { 0 => PitcherBoxVis, 1 => PitcherBoxHome, _ => null };
 
-         if (side == 0) VisName = mGame.t[side].nick;
-         else HomeName = mGame.t[side].nick;
+         if (side == 0) VisName = g.t[side].nick;
+         else HomeName = g.t[side].nick;
 
          // Batter box...
          Debug.WriteLine($"In Rebuild: Starting batters...");
