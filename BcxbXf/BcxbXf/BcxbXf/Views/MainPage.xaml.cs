@@ -12,12 +12,15 @@ using BCX.BCXCommon;
 using BcxbXf.Views;
 using BcxbDataAccess;
 using BcxbXf.Models;
+using SkiaSharp;
+using SkiaSharp.Views.Forms;
 
 namespace BcxbXf
 {
 
-   public partial class MainPage : ContentPage  {
-   // ---------------------------------------------------------
+   public partial class MainPage : ContentPage
+   {
+      // ---------------------------------------------------------
       CGame mGame;
 
       public bool SpeechOn = true;
@@ -50,8 +53,9 @@ namespace BcxbXf
       Label[] lblRunner = new Label[4];
       Label[] lblFielder = new Label[10];
 
-      public MainPage() {
-      // -------------------------------------------
+      public MainPage()
+      {
+         // -------------------------------------------
          InitializeComponent();
 
          _boxModel = new BoxScoreListViewModel();
@@ -61,14 +65,15 @@ namespace BcxbXf
          EnableControls();
 
 
-            Appearing += async delegate (object sender, EventArgs e) {
+         Appearing += async delegate (object sender, EventArgs e)
+         {
             // ---------------------------------------------------------
-            Debug.WriteLine("We've returned from " + returningFrom);
+            Debug.WriteLine("------------- We've returned from " + returningFrom);
 
             switch (sender) {
 
                case MainPage f:
-                  break; 
+                  break;
 
                case OptionsPage f:
                   int i = 1;
@@ -110,11 +115,11 @@ namespace BcxbXf
                      //lstPitBoxVis.ItemsSource = _boxModel.PitcherBoxVis;
                      //lstPitBoxHome.ItemsSource = _boxModel.PitcherBoxHome;
 
-                        txtResults.Text =
-                        "\nTap 'Mng' above to change starting lineups." +
-                        "\nWhen done, tap 'Start' below." +
-                        "\n\nMake sure phone is not in silent mode" +
-                        "\nto hear audio play-by-play.";
+                     txtResults.Text =
+                     "\nTap 'Mng' above to change starting lineups." +
+                     "\nWhen done, tap 'Start' below." +
+                     "\n\nMake sure phone is not in silent mode" +
+                     "\nto hear audio play-by-play.";
                      Activity2.IsRunning = false;
                      Activity2.IsVisible = false;
 
@@ -168,7 +173,7 @@ namespace BcxbXf
 
       }
 
-     // These 2 handlers copied from BoxScorePage.cs...
+      // These 2 handlers copied from BoxScorePage.cs...
 
       private void btnHomeBox_Clicked(object sender, EventArgs e)
       {
@@ -192,7 +197,8 @@ namespace BcxbXf
 
       }
 
-      private void btnPitBox_Clicked(object sender, EventArgs e) {
+      private void btnPitBox_Clicked(object sender, EventArgs e)
+      {
 
          //_boxModel.Rebuild(mGame, 0);
          //_boxModel.Rebuild(mGame, 1);
@@ -208,7 +214,8 @@ namespace BcxbXf
       }
 
 
-      private void ViewDidLoad() {
+      private void ViewDidLoad()
+      {
          // -------------------------------------------
          //GFileAccess.SetFolders();
          try {
@@ -229,8 +236,9 @@ namespace BcxbXf
       }
 
 
-      public void btnGo_Clicked(object sender, EventArgs e) {
-      // --------------------------------------------------------
+      public void btnGo_Clicked(object sender, EventArgs e)
+      {
+         // --------------------------------------------------------
          bool clocking = false;
          //BCX.BCXCommon.CActivityIndicator acty = null;
          btnGo.Text = "";
@@ -245,25 +253,26 @@ namespace BcxbXf
          int result = mGame.Go1();
          //if (clocking) acty.Hide(); //Can't rely on IsFatRunMode at end of game.
 
-      // Important not to normally call EnableControls here, because and 'await' in
-      // EShowResults will pop the control back here and so btnGo will be enabled while
-      // the results are still rolling. But if there's a validity error, namely like
-      // defense not correct after a pinch hit, then we *do* need to enable control here
-      // or else it will never be done.
-      // ------------------------------------------------------------------------------
-         if (result != 0) 
+         // Important not to normally call EnableControls here, because and 'await' in
+         // EShowResults will pop the control back here and so btnGo will be enabled while
+         // the results are still rolling. But if there's a validity error, namely like
+         // defense not correct after a pinch hit, then we *do* need to enable control here
+         // or else it will never be done.
+         // ------------------------------------------------------------------------------
+         if (result != 0)
             EnableControls(); //1907.01: Enable Play after defence message.
       }
 
 
-      private async Task SetupNewGame(CTeamRecord[] newTeams) {
+      private async Task SetupNewGame(CTeamRecord[] newTeams)
+      {
          // --------------------------------------------------------
          // Have just returned from PickTeams, and have the selected teams
          // in newTeams[] which is array of string...
 
          //mGame.UsingDh = selectedTeams[1].UsesDh; 
 
-         if ((newTeams[0].Year == 0 && newTeams[0].UserTeamID == 0) ||       
+         if ((newTeams[0].Year == 0 && newTeams[0].UserTeamID == 0) ||
              (newTeams[1].Year == 0 && newTeams[1].UserTeamID == 0)) return; //User did not pick. 
 
          // User has selected 2 teams for new game.
@@ -281,9 +290,9 @@ namespace BcxbXf
             int teamID = newTeams[1].UserTeamID; //For custom teams
             DTO_TeamRoster ros;
             switch (teamID) {
-               case 0:  ros = await DataAccess.GetTeamRosterOnLine(tm, yr); break;
+               case 0: ros = await DataAccess.GetTeamRosterOnLine(tm, yr); break;
                default: ros = await DataAccess.GetCustTeamRoster(teamID); break;
-            }  
+            }
             if (ros == null) throw new Exception($"Error: Could not load data for team, {newTeams[1].NickName}");
             mGame.t[1].ReadTeam(ros, 1);
          }
@@ -292,7 +301,7 @@ namespace BcxbXf
          }
 
          try {
-            string tm = newTeams[0].TeamTag.Trim(); 
+            string tm = newTeams[0].TeamTag.Trim();
             int yr = newTeams[0].Year;
             int teamID = newTeams[0].UserTeamID; //For custom teams
             DTO_TeamRoster ros;
@@ -322,7 +331,8 @@ namespace BcxbXf
 
       }
 
-      private void SetupScreen() {
+      private void SetupScreen()
+      {
          // ------------------------------------------------------
 
          // =====================================
@@ -399,8 +409,9 @@ namespace BcxbXf
       }
 
 
-      private void ShowRHE() {
-      // -------------------
+      private void ShowRHE()
+      {
+         // -------------------
          grdRHE[0, 0].Text = mGame.rk[0, 0].ToString();
          grdRHE[1, 0].Text = mGame.rk[1, 0].ToString();
          grdRHE[0, 1].Text = mGame.rk[0, 1].ToString();
@@ -415,7 +426,8 @@ namespace BcxbXf
       }
 
 
-      private void ShowRunners() {
+      private void ShowRunners()
+      {
          // --------------------------------------------------------------
          //if (mGame.IsFastRunMode) return;
          for (int b = 1; b <= 3; b++) {
@@ -428,7 +440,8 @@ namespace BcxbXf
       }
 
 
-      private void ShowRunnersOnly() {
+      private void ShowRunnersOnly()
+      {
          // --------------------------------------------------------------
          // This version of ShowRunners leaves the batter blank.
          //if (mGame.IsFastRunMode) return;
@@ -439,7 +452,8 @@ namespace BcxbXf
       }
 
 
-      private void ShowFielders(int fl) {
+      private void ShowFielders(int fl)
+      {
          // --------------------------------------------------------------
          for (int p = 1; p <= 9; p++) {
             if (mGame.t[fl].who[p] > 0)
@@ -453,7 +467,8 @@ namespace BcxbXf
 
 
 
-      private void AssignEventHandlers() {
+      private void AssignEventHandlers()
+      {
          // ---------------------------------------------------------------   
 
          // These are the Stream fetching events. Needed because, while a PCL can 
@@ -499,7 +514,8 @@ namespace BcxbXf
          mGame.EShowRHE += ShowRHE;
 
 
-         mGame.EShowResults += async delegate (int scenario) {
+         mGame.EShowResults += async delegate (int scenario)
+         {
             /* -------------------------------------------------------------------
                   *  There are 2 parts to ShowResults -- The part in Cgame, whatever it 
                   *  wants to do with the msg, like keep a scrolling log, and then the 
@@ -573,6 +589,9 @@ namespace BcxbXf
             string sBatter = mGame.CurrentBatterName;
             string sPitcher = mGame.CurrentPitcherName;
 
+            Debug.WriteLine("Will call InvalidateSurface");
+            canvasView1.InvalidateSurface();
+
             //disk1.Init(150, 220, mGame.cpara);
             //disk1.DiceRoll = mGame.diceRollBatting;
             //disk1.ProfileLabel = sBatter + " vs. " + sPitcher + ":";
@@ -599,13 +618,14 @@ namespace BcxbXf
 
 
          mGame.EFmtFieldingBar += delegate (
-            CFieldingParamSet fPar, string labels, string fielderName) {
+            CFieldingParamSet fPar, string labels, string fielderName)
+         {
             // ---------------------------------------------------------------------
-               if (mGame.runMode != CGame.RunMode.Normal && mGame.runMode != CGame.RunMode.FastEOP) return;
-               this.IsFieldingPlay = true;
-               btnProfileDisks.Source = "glove_img1a.png";
-            };
-  
+            if (mGame.runMode != CGame.RunMode.Normal && mGame.runMode != CGame.RunMode.FastEOP) return;
+            this.IsFieldingPlay = true;
+            btnProfileDisks.Source = "glove_img1a.png";
+         };
+
 
          mGame.EClearResults += async () => {
             // -------------------------------------------------------------------
@@ -617,8 +637,9 @@ namespace BcxbXf
          };
 
 
-         mGame.ENotifyUser += delegate (string s) {
-         // ---------------------------------------------------------------------
+         mGame.ENotifyUser += delegate (string s)
+         {
+            // ---------------------------------------------------------------------
             DisplayAlert("", s, "OK");
 
          };
@@ -627,7 +648,8 @@ namespace BcxbXf
 
       }
 
-      public void PostOuts() {
+      public void PostOuts()
+      {
          // --------------------------------------------------------------
          lblOuts1.Source = mGame.ok > 0 ? "redball" : "whtball";
          lblOuts2.Source = mGame.ok > 1 ? "redball" : "whtball";
@@ -637,19 +659,20 @@ namespace BcxbXf
 
 
 
-   // -----------------------------------------------------------------------
-   // This section has routines for displaying the line score, including what
-   // happens when there are extra innings, and the left & right shift buttons.
-   // -----------------------------------------------------------------------
+      // -----------------------------------------------------------------------
+      // This section has routines for displaying the line score, including what
+      // happens when there are extra innings, and the left & right shift buttons.
+      // -----------------------------------------------------------------------
 
 
       private int LinescoreStartInning = 1;
 
 
-      private void InitLinescore() {
-      // ---------------------------------------------------------
-      // This just blanks out the whole linescore, and posts inning
-      // numbers (not scores!) up to 9, or the current inning if more.
+      private void InitLinescore()
+      {
+         // ---------------------------------------------------------
+         // This just blanks out the whole linescore, and posts inning
+         // numbers (not scores!) up to 9, or the current inning if more.
 
          for (int ab1 = 0; ab1 <= 1; ab1++) {
             txtAbbrev[ab1].Text = mGame.t[ab1].lineName;
@@ -659,26 +682,27 @@ namespace BcxbXf
          for (int i = 1; i <= 9; i++) grdInning[i].Text = (i + iOff).ToString();
 
          // Visibility of the 2 shift buttons...
-         cmdShiftLeft.IsEnabled = cmdShiftLeft.IsVisible = mGame.inn > 9;   
-         cmdShiftRight.IsEnabled = cmdShiftRight.IsVisible = mGame.inn > 9; 
-         
+         cmdShiftLeft.IsEnabled = cmdShiftLeft.IsVisible = mGame.inn > 9;
+         cmdShiftRight.IsEnabled = cmdShiftRight.IsVisible = mGame.inn > 9;
+
       }
 
 
 
-      private void ShowLinescoreOne() {
-      // ---------------------------------------------------------------
-      // This just posts current inning (mGame.inn) for team at bat (mGame.ab).
-      // If the inning is not in current range, it adjusts the display.
-      // 1706.23
+      private void ShowLinescoreOne()
+      {
+         // ---------------------------------------------------------------
+         // This just posts current inning (mGame.inn) for team at bat (mGame.ab).
+         // If the inning is not in current range, it adjusts the display.
+         // 1706.23
 
          if (mGame.inn > LinescoreStartInning + 8) {
-         // Inning is not in current range, must adjust...
+            // Inning is not in current range, must adjust...
             do LinescoreStartInning += 9; while (mGame.inn > LinescoreStartInning + 8);
             ShowLinescoreFull();
          }
          else {
-         // Just post single half-inning score...  
+            // Just post single half-inning score...  
             int iOff = LinescoreStartInning - 1;
             grdLinescore[mGame.ab, mGame.inn - iOff].Text = mGame.lines[mGame.ab, mGame.inn].ToString();
             ShowRHE();
@@ -687,10 +711,11 @@ namespace BcxbXf
       }
 
 
-      private void ShowLinescoreFull() {
-      // --------------------------------------------------------
-      // This posts the entire linescore for game so far...
-      // But just showing visible innings (based on LinescoreStartInning).
+      private void ShowLinescoreFull()
+      {
+         // --------------------------------------------------------
+         // This posts the entire linescore for game so far...
+         // But just showing visible innings (based on LinescoreStartInning).
 
          int maxDisplayedInn;
          int iOff = LinescoreStartInning - 1;
@@ -707,7 +732,7 @@ namespace BcxbXf
 
          // Home...
          // Back off 1 inning unless 9th displayed inning is less than actual inn.
-         if (mGame.ab == 0 && !(maxDisplayedInn == 9 && (actualInn(9) <  mGame.inn))) maxDisplayedInn--; // <--Not tested!
+         if (mGame.ab == 0 && !(maxDisplayedInn == 9 && (actualInn(9) < mGame.inn))) maxDisplayedInn--; // <--Not tested!
          for (int i = 1; i <= maxDisplayedInn; i++) {
             grdLinescore[1, i].Text = mGame.lines[1, actualInn(i)].ToString();
          }
@@ -718,7 +743,8 @@ namespace BcxbXf
       }
 
 
-      private void cmdShiftLeft_Clicked(object sender, EventArgs e) {
+      private void cmdShiftLeft_Clicked(object sender, EventArgs e)
+      {
          // -----------------------------------------------------------
          if (LinescoreStartInning > 9) {
             LinescoreStartInning -= 9;
@@ -728,7 +754,8 @@ namespace BcxbXf
       }
 
 
-      private void cmdShiftRight_Clicked(object sender, EventArgs e) {
+      private void cmdShiftRight_Clicked(object sender, EventArgs e)
+      {
          // ------------------------------------------------------------
          if (mGame.inn > LinescoreStartInning + 8) {
             LinescoreStartInning += 9;
@@ -738,22 +765,23 @@ namespace BcxbXf
       }
 
 
-      private void EnableControls() {
+      private void EnableControls()
+      {
          // ----------------------------------------------------------------
          switch (mGame.PlayState) {
 
             case PLAY_STATE.PLAY:
-               cmdManageV.IsEnabled= true;
+               cmdManageV.IsEnabled = true;
                cmdPlays.IsEnabled = cmdOptions.IsEnabled = true;
                btnGo.IsEnabled /*= cmdInfo.Enabled*/ = true;
-               btnGo.Text="PLAY";
+               btnGo.Text = "PLAY";
                btnBoxScore.IsEnabled = true;
                btnProfileDisks.IsEnabled = true;
 
-            // This is needed here, as well as in 'Appearing', in case
-            // user does not open FieldingProfile page when the glove 
-            // appears.
-            // -------------------------------------------------------
+               // This is needed here, as well as in 'Appearing', in case
+               // user does not open FieldingProfile page when the glove 
+               // appears.
+               // -------------------------------------------------------
                this.IsFieldingPlay = false;
                btnProfileDisks.Source = "bat_img1a.png";
 
@@ -761,7 +789,7 @@ namespace BcxbXf
 
             case PLAY_STATE.NEXT:
                cmdManageV.IsEnabled = false;
-               cmdPlays.IsEnabled = false; 
+               cmdPlays.IsEnabled = false;
                cmdOptions.IsEnabled = true;
                btnGo.IsEnabled = true;
                btnGo.Text = "NEXT";
@@ -801,8 +829,9 @@ namespace BcxbXf
       }
 
 
-      async void mnuPickTeams_OnClick(object sender, EventArgs e) {
-      // -----------------------------------------------------------------
+      async void mnuPickTeams_OnClick(object sender, EventArgs e)
+      {
+         // -----------------------------------------------------------------
          try {
 
             fPickTeamsPrep = new PickTeamsPrepPage();
@@ -818,8 +847,9 @@ namespace BcxbXf
 
       }
 
-      async void mnuMngVis_OnClick(object sender, EventArgs e) {
-      // -------------------------------------------------------------
+      async void mnuMngVis_OnClick(object sender, EventArgs e)
+      {
+         // -------------------------------------------------------------
          fLineup = new LineupCardPage(mGame, 0);
          returningFrom = "LineupCardPage";
 
@@ -827,15 +857,17 @@ namespace BcxbXf
       }
 
 
-      async private void btnBoxScore_Clicked(object sender, EventArgs e) {
-      // -------------------------------------------------------------
+      async private void btnBoxScore_Clicked(object sender, EventArgs e)
+      {
+         // -------------------------------------------------------------
          //var fBoxScore = new BoxScorePage(mGame, 0);
          //returningFrom = "BoxScorePage";
          //await Navigation.PushAsync(fBoxScore);
 
       }
 
-      async private void btnProfileDisks_Clicked(object sender, EventArgs e) {
+      async private void btnProfileDisks_Clicked(object sender, EventArgs e)
+      {
          // -------------------------------------------------------------
          if (!this.IsFieldingPlay) {
             var fDisks = new ProfileDisk2Page(mGame);
@@ -851,7 +883,8 @@ namespace BcxbXf
 
       }
 
-      async private void mnuHelp_OnClick(object sender, EventArgs e) {
+      async private void mnuHelp_OnClick(object sender, EventArgs e)
+      {
          // -------------------------------------------------------
          var fAbout = new AboutPage();
          returningFrom = "AboutPage";
@@ -859,25 +892,59 @@ namespace BcxbXf
 
       }
 
-      async private void mnuPlays_OnClick(object sender, EventArgs e) {
-      // --------------------------------------------------------------
+      async private void mnuPlays_OnClick(object sender, EventArgs e)
+      {
+         // --------------------------------------------------------------
          fPlays = new PlaysPage(mGame);
          returningFrom = "PlaysPage";
          await Navigation.PushAsync(fPlays);
       }
 
-      async void mnuMngHome_OnClick(object sender, EventArgs e) {
+      async void mnuMngHome_OnClick(object sender, EventArgs e)
+      {
 
       }
-      async void mnuOptions_OnClick(object sender, EventArgs e) {
-      // ----------------------------------------------------------
+      async void mnuOptions_OnClick(object sender, EventArgs e)
+      {
+         // ----------------------------------------------------------
          fOptions = new OptionsPage(mGame, this.SpeechOn);
          returningFrom = "OptionsPage";
          await Navigation.PushAsync(fOptions);
 
       }
 
+      public void OnCanvasView1PaintSurface(object sender, SKPaintSurfaceEventArgs args)
+      {
+         // This draws the profile disk for the current batter & pitcher
+         // on the MainPage.
 
+         Debug.WriteLine("------------------ In OnCanvasView1PaintSurface");
+         if (mGame?.t is null) {
+            Debug.WriteLine("------------------ mGame.t is null");
+            return;
+         }
+         SKImageInfo info = args.Info;
+         SKSurface surface = args.Surface;
+         SKCanvas canvas = surface.Canvas;
+
+         canvas.Clear();
+
+         // Get name of batter & pitcher for labels on the disks...
+         CGame g = mGame;
+         int i = g.t[g.ab].linup[g.t[g.ab].slot];
+         int j = g.t[g.fl].curp;
+         CBatter b = g.t[g.ab].bat[i];
+         CPitcher p = g.t[g.fl].pit[j];
+
+         Debug.WriteLine($"-------------------- {b.bname} vs {p.pname}");
+         float x = info.Width / 2f;
+         GProfileDisk disk4 = new(x, x + 0, g.cpara, args) {
+            DiceRoll = mGame.diceRollBatting,
+            ProfileLabel = $"{b.bname} vs {p.pname}"
+         };
+         disk4.Draw();
+
+      }
 
    }
 

@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:BcxbXf"
              x:Class="BcxbXf.MainPage"
+             xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
              NavigationPage.HasNavigationBar="false">
 
    <!--<ContentPage.Padding>
@@ -31,22 +32,21 @@
          </Style>
             
          <Style x:Key="ToolbarButton" TargetType="Button">
-            <Setter Property="FontSize" >
-               <OnPlatform x:TypeArguments="x:String">
-                  <On Platform="iOS" Value="Large" />
-                  <On Platform="Android" Value="Micro" />
-               </OnPlatform>
-            </Setter>
+            <Setter Property="FontSize" Value="Subtitle" />
+            <Setter Property="FontAttributes" Value="Bold" />
             <Setter Property="TextColor" Value="Black" />
-            <Setter Property="BackgroundColor" Value="White" /> <!--#22B14C" -->
-            <Setter Property="Margin" Value="0,0,0,0" />
+            <Setter Property="BackgroundColor" Value="#EFE4B0" /> <!--#22B14C" -->
+            <Setter Property="WidthRequest" Value="420" />
+            <Setter Property="HeightRequest" Value="100" />
+            <Setter Property="CornerRadius" Value="15" />
+            <Setter Property="Margin" Value="10,10,10,10" />
             <Setter Property="Padding" Value="0,0,0,0" />
-            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
                 
          </Style>
             
          <Style x:Key="LineScoreItem" TargetType="Label">
-            <Setter Property="FontSize" Value="Small" />
+            <Setter Property="FontSize" Value="Title" />
             <Setter Property="TextColor" Value="White" />
             <Setter Property="Margin" Value="0,0,0,0" />
             <Setter Property="BackgroundColor" Value="Black" />
@@ -56,7 +56,7 @@
          </Style>
 
          <Style x:Key="LineScoreHeader" TargetType="Label">
-            <Setter Property="FontSize" Value="Micro" />
+            <Setter Property="FontSize" Value="Medium" />
             <Setter Property="TextColor" Value="Black" />
             <Setter Property="Margin" Value="0,0,0,0" />
             <Setter Property="BackgroundColor" Value="White" />
@@ -100,7 +100,7 @@
          <ColumnDefinition Width="*" />
       </Grid.ColumnDefinitions>
       <Grid.RowDefinitions>
-         <RowDefinition Height="0.40*" />
+         <RowDefinition Height="0.5*" />
          <RowDefinition Height="*" />
          <RowDefinition Height="4.5*" />
          <RowDefinition Height="0.6*" />
@@ -121,19 +121,19 @@
       Implimemented a buttons in a 1-row grid
       ================================================================= -->
 
-      <!-- Start bottom buttons -->
+      <!-- Start top buttons -->
       <Grid Padding="0" BackgroundColor="White" Grid.Row="0" >
 
          <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1.7*" />
-            <ColumnDefinition Width="0.6*" />
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="1.1*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
          </Grid.ColumnDefinitions>
 
          <Button Text="New Game" Grid.Column="0" Clicked="mnuPickTeams_OnClick" Style="{StaticResource ToolbarButton}" />
-         <Button x:Name="cmdManageV" Text="Mng" Grid.Column="1" Clicked="mnuMngVis_OnClick" Style="{StaticResource ToolbarButton}" IsEnabled="false"/>
+         <Button x:Name="cmdManageV" Text="Manage" Grid.Column="1" Clicked="mnuMngVis_OnClick" Style="{StaticResource ToolbarButton}" IsEnabled="false"/>
          <Button x:Name="cmdPlays" Text="Plays" Grid.Column="2" Clicked="mnuPlays_OnClick" Style="{StaticResource ToolbarButton}" IsEnabled="true"/>
          <Button x:Name="cmdOptions" Text="Options" Grid.Column="3" Clicked="mnuOptions_OnClick" Style="{StaticResource ToolbarButton}" IsEnabled="true"/>
          <Button x:Name="cmdHelp" Grid.Column="4" Clicked="mnuHelp_OnClick" Style="{StaticResource ToolbarButton}" IsEnabled="true">
@@ -395,7 +395,7 @@
          <Grid Grid.Column="1" > 
 
             <Grid.RowDefinitions>
-               <RowDefinition Height="1.6*" />
+               <RowDefinition Height="1.35*" />
                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
@@ -686,10 +686,14 @@
             <!-- End box scores -->
                         
             <!-- Grid elt #2/2 == Profile disk -->
-            <Label 
-               Text="Here be profile disk" 
-               Grid.Row="1"/>
-                    
+            <StackLayout x:Name="ScrollRegion1" Grid.Row="1" >
+               <!--<Label Text="Profile disk goes here" />-->
+               <skia:SKCanvasView x:Name="canvasView1" HeightRequest="2000"
+                           PaintSurface="OnCanvasView1PaintSurface"
+               />
+
+            </StackLayout>
+
          </Grid>
          <!-- End right side -->
 

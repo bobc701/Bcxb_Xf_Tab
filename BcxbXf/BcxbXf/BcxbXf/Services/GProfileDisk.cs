@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using System.Diagnostics;
 
 using SkiaSharp;
 using SkiaSharp.Views.Forms;
@@ -90,20 +91,22 @@ namespace BCX.BCXB {
       }
 
 
-      public void Draw(bool showColorKey = true) {
-         // -----------------------------------------
+      public void Draw(bool showColorKey = true) 
+      {
+         Debug.WriteLine("------------------------- In GProfileDisk.Draw");
          float x, y, yDel = 42;
          if (this.pcts == null) return;
-         if (showColorKey) 
-         // It is batter / pitcher profilr...
-            DrawColorKey();
+         if (showColorKey) {
+            // It is batter / pitcher profilr...
+            //DrawColorKey();
+         }
          else {
-         // It is fieldeing profile...
-            y =60;
+            // It is fieldeing profile...
+            y = 60;
             x = 75; //120;
             paintDef.TextSize = Wid(0.04f);
             canvas.DrawText("This play was based on fielding ability.", x, y, paintDef);
-            canvas.DrawText("Fielders are rated 0 to 6 at each position.", x, y+yDel, paintDef);
+            canvas.DrawText("Fielders are rated 0 to 6 at each position.", x, y + yDel, paintDef);
          }
 
          DrawProfileDisk();
