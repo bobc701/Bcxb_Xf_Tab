@@ -23,7 +23,7 @@ namespace BCX.BCXB {
       private SKRect rectOuter, rectInner;
 
    // Things that need to be set by the caller...
-      private float X, Y; //Center of the disc;
+      private float X, Y, R; //Center of the disc & radius
       private CParamSet para; //UISearchBarDelegate to extract pcts.
       private double[] pcts;
       private int iFrom, iTo;
@@ -68,7 +68,7 @@ namespace BCX.BCXB {
       }
 
 
-      public GProfileDisk (double x1, double y1, CParamSet para1, SKPaintSurfaceEventArgs args) {
+      public GProfileDisk (double x1, double y1, double r1, CParamSet para1, SKPaintSurfaceEventArgs args) {
       // ------------------------------------------------------------------------------
          canvas = args.Surface.Canvas;
          info = args.Info;
@@ -76,6 +76,7 @@ namespace BCX.BCXB {
          para = para1;
          X = (float)x1;
          Y = (float)y1;
+         R = (float)r1;
          iFrom = 1;
          iTo = para1.SegmentCount;
          pcts = para1.GetWidthArray();
@@ -91,22 +92,29 @@ namespace BCX.BCXB {
       }
 
 
-      public void Draw(bool showColorKey = true) 
+      public void Draw(int option, bool showColorKey = true) 
       {
          Debug.WriteLine("------------------------- In GProfileDisk.Draw");
          float x, y, yDel = 42;
          if (this.pcts == null) return;
-         if (showColorKey) {
-            // It is batter / pitcher profilr...
-            //DrawColorKey();
-         }
-         else {
-            // It is fieldeing profile...
-            y = 60;
-            x = 75; //120;
-            paintDef.TextSize = Wid(0.04f);
-            canvas.DrawText("This play was based on fielding ability.", x, y, paintDef);
-            canvas.DrawText("Fielders are rated 0 to 6 at each position.", x, y + yDel, paintDef);
+         switch (option) {
+
+            case 1: //Show color key
+               // It is batter / pitcher profilr...
+               DrawColorKey();
+               break;
+
+            case 2: //Show fielding text
+               // It is fieldeing profile...
+               y = 60;
+               x = 75; //120;
+               paintDef.TextSize = R*0.1f;
+               canvas.DrawText("This play was based on fielding ability.", x, y, paintDef);
+               canvas.DrawText("Fielders are rated 0 to 6 at each position.", x, y + yDel, paintDef);
+               break;
+
+            case 0: //Show neither
+               break;
          }
 
          DrawProfileDisk();
@@ -128,8 +136,8 @@ namespace BCX.BCXB {
          float a2;
 
          var p0 = new SKPoint(X, Y);
-         rOuter = X - Wid(0.07f); //70.0f;   // Radius of disk so it leaves space on each side.
-         rInner = rOuter - Wid(0.132f); //130; 
+         rOuter = R; // Radius of disk so it leaves space on each side.
+         rInner = rOuter * 0.65f;
          rectOuter = new SKRect(p0.X - rOuter, p0.Y - rOuter, p0.X + rOuter, p0.Y + rOuter);
          rectInner = new SKRect(p0.X - rInner, p0.Y - rInner, p0.X + rInner, p0.Y + rInner);
 
@@ -268,14 +276,14 @@ namespace BCX.BCXB {
 
          var paint = new SKPaint {
             Style = SKPaintStyle.Fill,
-            TextSize = Wid(0.04f), //45, 
+            TextSize = R*0.095f, //45, 
             TextAlign = SKTextAlign.Center,
             StrokeWidth = 1
          };
 
          var paintKey = new SKPaint {
             Style = SKPaintStyle.Fill,
-            TextSize = Wid(0.04f), //45,
+            TextSize = R*0.095f, //45,
             TextAlign = SKTextAlign.Left,
             StrokeWidth = 1
          };
@@ -288,12 +296,12 @@ namespace BCX.BCXB {
 
       // Write the sub-labels...
          pStart = new SKPoint(X, Y + 0.3f * rInner);
-         paint.TextSize = Wid(0.032f); //30f;
+         paint.TextSize = R * 0.07f; //30f;
          paint.FakeBoldText = false;
          canvas.DrawText(subLabel1, pStart, paint);
 
          pStart = new SKPoint(X, Y + 0.3f * rInner + 30); ; 
-         paint.TextSize = Wid(0.032f); //30f;
+         paint.TextSize = R*0.07f; //30f;
          paint.FakeBoldText = false;
          canvas.DrawText(subLabel2, pStart, paint);
 

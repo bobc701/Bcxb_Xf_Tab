@@ -36,9 +36,9 @@ namespace BcxbXf.Views
 
          canvas.Clear();
 
-         var x = info.Width / 2f;
+         float x = info.Width / 2f;
 
-         disk1 = new GProfileDisk(x, x + 100, g.fpara, args) {
+         disk1 = new GProfileDisk(x, x + 100, x*0.9f, g.fpara, args) {
             DiceRoll = g.diceRollFielding,
             ProfileLabel = g.fpara.fielderName + " fielding..."
          };
@@ -46,7 +46,7 @@ namespace BcxbXf.Views
          string[] aText = g.fpara.description.Split('/');
          disk1.SubLabel1 = "Green: " + aText [0] + ", Red: " + aText [1];
          disk1.SubLabel2 = "Fielding ability: " + g.fpara.fielderSkill;
-         disk1.Draw(showColorKey: false);
+         disk1.Draw(2);
 
       }
    }

@@ -46,35 +46,36 @@ namespace BcxbXf.Views {
          string sBatter = b.bname;
          string sPitcher = p.pname;
 
-         var x = info.Width / 2f;
+         float x = info.Width / 4f;
+         float r = x * 0.8f;
 
-         draw4 = new GProfileDisk(x, x + 250, g.cpara, args) {
+         draw4 = new GProfileDisk(x, x + 250, r, g.cpara, args) {
             DiceRoll = g.diceRollBatting,
             ProfileLabel = sBatter + " vs. " + sPitcher
          };
-         draw4.Draw();
+         draw4.Draw(1);
 
-         disk2 = new GProfileDisk(x, 3*x + 280, b.par, args) {
+         disk2 = new GProfileDisk(3*x, x + 250, r, b.par, args) {
             DiceRoll = g.diceRollBatting,
             ProfileLabel = sBatter + " vs. League Norm",
             SubLabel1 = BatterStatsString(1),
             SubLabel2 = BatterStatsString(2)
          };
-         disk2.Draw();
+         disk2.Draw(1);
 
-         disk3 = new GProfileDisk(x, 5*x + 310, p.par, args) {
+         disk3 = new GProfileDisk(x, 3*x + 280,r,  p.par, args) {
             DiceRoll = g.diceRollBatting,
             ProfileLabel = sPitcher + " vs. League Norm",
             SubLabel1 = PitcherStatsString(1),
             SubLabel2 = PitcherStatsString(2)
          };
-         disk3.Draw();
+         disk3.Draw(1);
 
-         disk1 = new GProfileDisk(x, 7*x + 340, g.cmean, args) {
+         disk1 = new GProfileDisk(3*x, 3*x + 280, r, g.cmean, args) {
             DiceRoll = g.diceRollBatting,
             ProfileLabel = "League Norm"
          };
-         disk1.Draw();
+         disk1.Draw(1);
 
       }
 

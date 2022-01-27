@@ -938,11 +938,11 @@ namespace BcxbXf
 
          Debug.WriteLine($"-------------------- {b.bname} vs {p.pname}");
          float x = info.Width / 2f;
-         GProfileDisk disk4 = new(x, x + 0, g.cpara, args) {
+         GProfileDisk disk4 = new(x, x*0.9f, x*0.6f, g.cpara, args) {
             DiceRoll = mGame.diceRollBatting,
             ProfileLabel = $"{b.bname} vs {p.pname}"
          };
-         disk4.Draw();
+         disk4.Draw(0);
 
       }
 
