@@ -16,7 +16,7 @@ namespace BcxbXf.Views {
    [XamlCompilation(XamlCompilationOptions.Compile)]
    public partial class ProfileDisk2Page : ContentPage {
 
-      public GProfileDisk disk1, disk2, disk3, draw4;
+      public GProfileDisk disk1, disk2, disk3, disk4;
       public CGame g; //Assigned in PrepareForSegue.
       CBatter b;
       CPitcher p;
@@ -49,11 +49,12 @@ namespace BcxbXf.Views {
          float x = info.Width / 4f;
          float r = x * 0.8f;
 
-         draw4 = new GProfileDisk(x, x + 250, r, g.cpara, args) {
+         disk4 = new GProfileDisk(x, x + 250, r, g.cpara, args) {
             DiceRoll = g.diceRollBatting,
             ProfileLabel = sBatter + " vs. " + sPitcher
          };
-         draw4.Draw(1);
+         disk4.DrawColorKey();
+         disk4.Draw();
 
          disk2 = new GProfileDisk(3*x, x + 250, r, b.par, args) {
             DiceRoll = g.diceRollBatting,
@@ -61,7 +62,7 @@ namespace BcxbXf.Views {
             SubLabel1 = BatterStatsString(1),
             SubLabel2 = BatterStatsString(2)
          };
-         disk2.Draw(1);
+         disk2.Draw();
 
          disk3 = new GProfileDisk(x, 3*x + 280,r,  p.par, args) {
             DiceRoll = g.diceRollBatting,
@@ -69,13 +70,13 @@ namespace BcxbXf.Views {
             SubLabel1 = PitcherStatsString(1),
             SubLabel2 = PitcherStatsString(2)
          };
-         disk3.Draw(1);
+         disk3.Draw();
 
          disk1 = new GProfileDisk(3*x, 3*x + 280, r, g.cmean, args) {
             DiceRoll = g.diceRollBatting,
             ProfileLabel = "League Norm"
          };
-         disk1.Draw(1);
+         disk1.Draw();
 
       }
 

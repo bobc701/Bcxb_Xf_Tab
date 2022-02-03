@@ -23,12 +23,12 @@
    <ContentPage.Resources>
       <ResourceDictionary>
          <Style x:Key="ButtonStyle1" TargetType="Button">
-               <Setter Property="FontSize" Value="Medium" />
-               <Setter Property="TextColor" Value="White" />
-               <Setter Property="BackgroundColor" Value="#22B14C" />
-               <!--<Setter Property="WidthRequest" Value="40" />-->
-               <!--<Setter Property="HeightRequest" Value="40" />-->
-               <Setter Property="Margin" Value="0,0,0,0" />
+            <Setter Property="FontSize" Value="Medium" />
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="BackgroundColor" Value="#22B14C" />
+            <!--<Setter Property="WidthRequest" Value="40" />-->
+            <!--<Setter Property="HeightRequest" Value="40" />-->
+            <Setter Property="Margin" Value="0,0,0,0" />
          </Style>
             
          <Style x:Key="ToolbarButton" TargetType="Button">
@@ -42,12 +42,12 @@
             <Setter Property="Margin" Value="10,10,10,10" />
             <Setter Property="Padding" Value="0,0,0,0" />
             <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
-                
          </Style>
             
          <Style x:Key="LineScoreItem" TargetType="Label">
             <Setter Property="FontSize" Value="Title" />
             <Setter Property="TextColor" Value="White" />
+            <Setter Property="FontAttributes" Value="Bold" />
             <Setter Property="Margin" Value="0,0,0,0" />
             <Setter Property="BackgroundColor" Value="Black" />
             <Setter Property="HorizontalOptions" Value="FillAndExpand" />
@@ -70,7 +70,6 @@
             <Setter Property="FontAttributes" Value="Bold" />
          </Style>
 
-         <!-- Copied from BoxScorePage -->
          <Style x:Key="LabelItem1" TargetType="Label">
             <Setter Property="FontSize" Value="Medium" />
             <Setter Property="TextColor" Value="White" />
@@ -81,6 +80,13 @@
             <Setter Property="HorizontalTextAlignment" Value="End" />
             <Setter Property="VerticalTextAlignment" Value="Center" />
          </Style>
+
+         <Style x:Key="FielderName1" TargetType="Label" >
+            <Setter Property="TextColor" Value="Black" />
+            <Setter Property="FontAttributes" Value="None" />
+            <Setter Property="FontSize" Value="Large" />
+         </Style>
+
 
       </ResourceDictionary>
    </ContentPage.Resources>
@@ -100,10 +106,10 @@
          <ColumnDefinition Width="*" />
       </Grid.ColumnDefinitions>
       <Grid.RowDefinitions>
-         <RowDefinition Height="0.5*" />
-         <RowDefinition Height="*" />
-         <RowDefinition Height="4.5*" />
-         <RowDefinition Height="0.6*" />
+         <RowDefinition Height="0.5*" /> <!-- Buttons across top -->
+         <RowDefinition Height="0.8*" /> <!-- Line score -->
+         <RowDefinition Height="4.5*" /> <!-- Fiels image & box score -->
+         <RowDefinition Height="0.6*" /> <!-- Buttons across botton -->
       </Grid.RowDefinitions>
 
 
@@ -279,6 +285,7 @@
                Out balls
                ====================== -->
                <Label Text="Outs" 
+                  FontSize="Medium"
                   AbsoluteLayout.LayoutBounds=".16, .80, AutoSize, AutoSize" 
                   AbsoluteLayout.LayoutFlags="PositionProportional" />
                <Image  x:Name="lblOuts1" Source="whtball"  
@@ -298,15 +305,19 @@
 
                <Label x:Name="lblFielder1" Text="" 
                   AbsoluteLayout.LayoutBounds=".5, .70, AutoSize, AutoSize" 
-                  AbsoluteLayout.LayoutFlags="PositionProportional" />
+                  AbsoluteLayout.LayoutFlags="PositionProportional" 
+                  Style="{StaticResource FielderName1}"/>
 
                <Label x:Name="lblFielder2" Text="" 
                   AbsoluteLayout.LayoutBounds=".5, 1.0, AutoSize, AutoSize" 
-                  AbsoluteLayout.LayoutFlags="PositionProportional" />
+                  AbsoluteLayout.LayoutFlags="PositionProportional" 
+                  Style="{StaticResource FielderName1}"/>
 
                <Label x:Name="lblFielder3" Text="" 
                   AbsoluteLayout.LayoutBounds=".7, .55, AutoSize, AutoSize" 
-                  AbsoluteLayout.LayoutFlags="PositionProportional" />
+                  AbsoluteLayout.LayoutFlags="PositionProportional" 
+                  Style="{StaticResource FielderName1}"/>
+
 
                <Label x:Name="lblFielder4" Text="" 
                   AbsoluteLayout.LayoutBounds=".7, .37, AutoSize, AutoSize" 
@@ -314,23 +325,28 @@
 
                <Label x:Name="lblFielder5" Text="" 
                   AbsoluteLayout.LayoutBounds=".3, .55, AutoSize, AutoSize" 
-                  AbsoluteLayout.LayoutFlags="PositionProportional" />
+                  AbsoluteLayout.LayoutFlags="PositionProportional"
+                  Style="{StaticResource FielderName1}"/>
 
                <Label x:Name="lblFielder6" Text="" 
                   AbsoluteLayout.LayoutBounds=".33, .37, AutoSize, AutoSize" 
-                  AbsoluteLayout.LayoutFlags="PositionProportional" />
+                  AbsoluteLayout.LayoutFlags="PositionProportional" 
+                  Style="{StaticResource FielderName1}"/>
 
                <Label x:Name="lblFielder7" Text="" 
                   AbsoluteLayout.LayoutBounds=".15, .2, AutoSize, AutoSize" 
-                  AbsoluteLayout.LayoutFlags="PositionProportional" />
+                  AbsoluteLayout.LayoutFlags="PositionProportional" 
+                  Style="{StaticResource FielderName1}"/>
 
                <Label x:Name="lblFielder8" Text="" 
                   AbsoluteLayout.LayoutBounds=".5, .08, AutoSize, AutoSize" 
-                  AbsoluteLayout.LayoutFlags="PositionProportional" />
+                  AbsoluteLayout.LayoutFlags="PositionProportional" 
+                  Style="{StaticResource FielderName1}"/>
 
                <Label x:Name="lblFielder9" Text="" 
                   AbsoluteLayout.LayoutBounds=".85, .2, AutoSize, AutoSize" 
-                  AbsoluteLayout.LayoutFlags="PositionProportional" />
+                  AbsoluteLayout.LayoutFlags="PositionProportional" 
+                  Style="{StaticResource FielderName1}"/>
 
 
                <!-- ======================
@@ -372,7 +388,7 @@
                   AbsoluteLayout.LayoutFlags="PositionProportional" >
                   <Label 
                      x:Name="txtResults" Text="Results" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"  
-                     FontSize="Small" HorizontalTextAlignment="Start"
+                     FontSize="Large" HorizontalTextAlignment="Start"
                      TextColor="Black" FontAttributes="Bold"
                      BackgroundColor="#EFE4B0" 
                      Margin="0" >
@@ -456,7 +472,7 @@
                   <!--ListView #1 == Batters ===================================== -->
                   <Label 
                      x:Name="lblBatBoxBoth"
-                     Text="{Binding VisName}"
+                     Text="{Binding HomeName}"
                      FontAttributes="Bold" FontSize="Large" TextColor="White" BackgroundColor="Black"
                      IsVisible="true" />
                   <ListView 
@@ -688,8 +704,44 @@
             <!-- Grid elt #2/2 == Profile disk -->
             <StackLayout x:Name="ScrollRegion1" Grid.Row="1" >
                <!--<Label Text="Profile disk goes here" />-->
-               <skia:SKCanvasView x:Name="canvasView1" HeightRequest="2000"
-                           PaintSurface="OnCanvasView1PaintSurface"
+
+               <!-- Two tab buttons for Batting / Fielding disks -->
+               <Grid Padding="0" Margin="0" BackgroundColor="White" >
+                  <Grid.ColumnDefinitions>
+                     <ColumnDefinition Width="*" />
+                     <ColumnDefinition Width="*" />
+                  </Grid.ColumnDefinitions>
+                  <Grid.RowDefinitions>
+                     <RowDefinition Height="30" />
+                  </Grid.RowDefinitions>
+
+                  <Button 
+                     x:Name="btnBatterDisk"  
+                     Text="Batting/Pitching" 
+                     IsEnabled="true"
+                     Padding="0" Margin="0" Grid.Column="0" 
+                     Clicked="btnBatterDisk_Clicked" 
+                     BackgroundColor="CadetBlue" TextColor="White"
+                     HorizontalOptions="FillAndExpand"/>
+                  <Button 
+                     x:Name="btnFieldingDisk" 
+                     Text="Fielding" 
+                     IsEnabled="False"
+                     Padding="0" Margin="0" Grid.Column="1" 
+                     Clicked="btnFieldingDisk_Clicked" 
+                     BackgroundColor="CadetBlue" TextColor="White"
+                     HorizontalOptions="FillAndExpand"/>
+
+               </Grid>
+
+               <skia:SKCanvasView x:Name="canvasView1" 
+                  HeightRequest="2000"
+                  PaintSurface="OnCanvasView1PaintSurface"
+               />
+               <skia:SKCanvasView x:Name="canvasViewFld" 
+                  HeightRequest="2000"
+                  PaintSurface="OnCanvasViewFld_PaintSurface"
+                  IsVisible="false"
                />
 
             </StackLayout>
@@ -705,8 +757,7 @@
       <Grid Padding="0" BackgroundColor="Black" Grid.Row="3" Grid.Column="0" > 
 
          <Grid.ColumnDefinitions>
-         <ColumnDefinition Width="4*" />
-         <ColumnDefinition Width="*" />
+         <ColumnDefinition Width="4.7*" />
          <ColumnDefinition Width="*" />
       </Grid.ColumnDefinitions>
       <Grid.RowDefinitions>
@@ -714,24 +765,32 @@
       </Grid.RowDefinitions>
 
          <Button Grid.Row="0" Grid.Column="0" 
-            x:Name="btnGo" Text="START" Clicked="btnGo_Clicked" Margin="0" Padding="0,0,0,0" BackgroundColor="DarkGray"
+            x:Name="btnGo" 
+            Text="START" 
+            FontSize="32" FontAttributes="Bold"
+            Clicked="btnGo_Clicked" 
+            Margin="0" Padding="0,0,0,0" 
+            BackgroundColor="DarkGray"
             CornerRadius="10">
          </Button>
          <Button Grid.Row="0" Grid.Column="1" 
-            x:Name="btnBoxScore" Text="BOX" Clicked="btnBoxScore_Clicked" Margin="0" Padding="0,0,0,0" TextColor="White" BackgroundColor="DarkCyan"
-            CornerRadius="10" >
+            x:Name="btnProfileDisks" 
+            Text="DETAILS" 
+            FontSize="32" FontAttributes="Bold"
+            Clicked="btnProfileDisks_Clicked" 
+            Margin="0" Padding="0,0,0,0" 
+            TextColor="White" BackgroundColor="DarkCyan"
+            CornerRadius="10" Image="bat_img1a.png" >
          </Button>
-         <!--<Button Grid.Row="0" Grid.Column="2" 
-               x:Name="btnProfileDisks" Text="" Clicked="btnProfileDisks_Clicked" Margin="0" Padding="0,0,0,0" TextColor="White" BackgroundColor="DarkCyan"
-                     CornerRadius="10" Image="bat_img1a.png" >
-         </Button>-->
-         <ImageButton Grid.Row="0" Grid.Column="2" 
+         <!--<ImageButton Grid.Row="0" Grid.Column="1" 
             x:Name="btnProfileDisks" 
             Clicked="btnProfileDisks_Clicked" 
             Margin="0" Padding="0,0,0,0" 
             BackgroundColor="DarkCyan"
-            CornerRadius="10" Source="bat_img1a.png" Aspect="Fill" >
-         </ImageButton>
+            CornerRadius="10" 
+            Source="bat_img1a.png" 
+            Aspect="Fill" >
+         </ImageButton>-->
 
       </Grid>
       <!-- End bottom row buttons -->

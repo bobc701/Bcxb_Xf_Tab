@@ -27,10 +27,10 @@
                                 </constraints>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="2637" translatesAutoresizingMaskIntoConstraints="NO" image="splash_batter">
-                                <rect key="frame" x="24" y="440" width="366" height="200"/>
+                                <rect key="frame" x="24" y="440" width="560" height="300"/>
                                 <constraints>
-                                    <constraint id="3093" firstAttribute="height" constant="200"/>
-                                    <constraint id="3095" firstAttribute="width" constant="366"/>
+                                    <constraint id="3093" firstAttribute="height" constant="300"/>
+                                    <constraint id="3095" firstAttribute="width" constant="560"/>
                                 </constraints>
                             </imageView>
                         </subviews>

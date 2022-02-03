@@ -43,6 +43,7 @@ namespace BcxbXf.Models {
 
          if (side == 0) VisName = g.t[side].nick;
          else HomeName = g.t[side].nick;
+         Debug.WriteLine($"In Rebuild: VisName={VisName} HomeName={HomeName}");
 
          // Batter box...
          Debug.WriteLine($"In Rebuild: Starting batters...");

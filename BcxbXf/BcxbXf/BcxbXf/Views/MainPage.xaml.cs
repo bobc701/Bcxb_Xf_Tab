@@ -115,6 +115,8 @@ namespace BcxbXf
                      //lstPitBoxVis.ItemsSource = _boxModel.PitcherBoxVis;
                      //lstPitBoxHome.ItemsSource = _boxModel.PitcherBoxHome;
 
+                     lblBatBoxBoth.Text = _boxModel.VisName;
+
                      txtResults.Text =
                      "\nTap 'Mng' above to change starting lineups." +
                      "\nWhen done, tap 'Start' below." +
@@ -158,10 +160,10 @@ namespace BcxbXf
                   fOptions = null;
                   break;
 
-               case "FieldingDiskPage":
-                  this.IsFieldingPlay = false;
-                  btnProfileDisks.Source = "bat_img1a.png";
-                  break;
+               //case "FieldingDiskPage":
+               //   this.IsFieldingPlay = false;
+               //   btnProfileDisks.Source = "bat_img1a.png";
+               //   break;
 
                case "AboutPage":
                   break;
@@ -179,6 +181,7 @@ namespace BcxbXf
       {
          //_boxModel.Rebuild(mGame, 1);
          lstBatBoxBoth.ItemsSource = _boxModel.BatterBoxHome;
+         lblBatBoxBoth.Text = _boxModel.HomeName;
 
          lblBatBoxBoth.IsVisible = true; lstBatBoxBoth.IsVisible = true;
          lblPitBoxVis.IsVisible = false; lstPitBoxVis.IsVisible = false;
@@ -190,6 +193,7 @@ namespace BcxbXf
       {
          //_boxModel.Rebuild(mGame, 0);
          lstBatBoxBoth.ItemsSource = _boxModel.BatterBoxVis;
+         lblBatBoxBoth.Text = _boxModel.VisName;
 
          lblBatBoxBoth.IsVisible = true; lstBatBoxBoth.IsVisible = true;
          lblPitBoxVis.IsVisible = false; lstPitBoxVis.IsVisible = false;
@@ -589,8 +593,25 @@ namespace BcxbXf
             string sBatter = mGame.CurrentBatterName;
             string sPitcher = mGame.CurrentPitcherName;
 
-            Debug.WriteLine("Will call InvalidateSurface");
+         // Redreaw the batter/pitcher profile disk...
+            Debug.WriteLine("Calling InvalidateSurface");
             canvasView1.InvalidateSurface();
+
+         // If it's a fielding play, enable the tab and resdraw the 
+         // fielding profile disk...
+            if (IsFieldingPlay) {
+               btnFieldingDisk.IsEnabled = true;
+               canvasView1.InvalidateSurface();
+               canvasView1.IsVisible = false;
+               canvasViewFld.IsVisible = true;
+            }
+            else {
+               btnFieldingDisk.IsEnabled = false;
+               canvasViewFld.IsVisible = false;
+               canvasView1.IsVisible = true;
+
+            }
+               
 
             //disk1.Init(150, 220, mGame.cpara);
             //disk1.DiceRoll = mGame.diceRollBatting;
@@ -623,7 +644,7 @@ namespace BcxbXf
             // ---------------------------------------------------------------------
             if (mGame.runMode != CGame.RunMode.Normal && mGame.runMode != CGame.RunMode.FastEOP) return;
             this.IsFieldingPlay = true;
-            btnProfileDisks.Source = "glove_img1a.png";
+            //btnProfileDisks.Source = "glove_img1a.png";
          };
 
 
@@ -775,15 +796,17 @@ namespace BcxbXf
                cmdPlays.IsEnabled = cmdOptions.IsEnabled = true;
                btnGo.IsEnabled /*= cmdInfo.Enabled*/ = true;
                btnGo.Text = "PLAY";
-               btnBoxScore.IsEnabled = true;
+               //btnBoxScore.IsEnabled = true;
                btnProfileDisks.IsEnabled = true;
 
                // This is needed here, as well as in 'Appearing', in case
                // user does not open FieldingProfile page when the glove 
                // appears.
                // -------------------------------------------------------
-               this.IsFieldingPlay = false;
-               btnProfileDisks.Source = "bat_img1a.png";
+               IsFieldingPlay = false;
+               canvasViewFld.IsVisible = false;
+               canvasView1.IsVisible = true;
+               //btnProfileDisks.Source = "bat_img1a.png";
 
                break;
 
@@ -792,8 +815,7 @@ namespace BcxbXf
                cmdPlays.IsEnabled = false;
                cmdOptions.IsEnabled = true;
                btnGo.IsEnabled = true;
-               btnGo.Text = "NEXT";
-               btnBoxScore.IsEnabled = true;
+               btnGo.Text = "BATTER UP!";
                btnProfileDisks.IsEnabled = true;
                break;
 
@@ -802,7 +824,6 @@ namespace BcxbXf
                cmdPlays.IsEnabled = cmdOptions.IsEnabled = false;
                btnGo.IsEnabled = true;
                btnGo.Text = "START";
-               btnBoxScore.IsEnabled = true;
                btnProfileDisks.IsEnabled = false;
                break;
 
@@ -811,7 +832,6 @@ namespace BcxbXf
                cmdPlays.IsEnabled = cmdOptions.IsEnabled = false;
                btnGo.IsEnabled = false;
                btnGo.Text = "";
-               btnBoxScore.IsEnabled = false;
                btnProfileDisks.IsEnabled = false;
                break;
 
@@ -820,7 +840,7 @@ namespace BcxbXf
                cmdPlays.IsEnabled = cmdOptions.IsEnabled = false;
                btnGo.IsEnabled = false;
                btnGo.Text = "";
-               btnBoxScore.IsEnabled = true;
+               //btnBoxScore.IsEnabled = true;
                btnProfileDisks.IsEnabled = true;
                break;
 
@@ -868,18 +888,9 @@ namespace BcxbXf
 
       async private void btnProfileDisks_Clicked(object sender, EventArgs e)
       {
-         // -------------------------------------------------------------
-         if (!this.IsFieldingPlay) {
-            var fDisks = new ProfileDisk2Page(mGame);
-            returningFrom = "ProfileDiskPage";
-            await Navigation.PushAsync(fDisks);
-         }
-         else {
-            var fDisks = new FieldingDiskPage(mGame);
-            returningFrom = "FieldingDiskPage";
-            await Navigation.PushAsync(fDisks);
-
-         }
+         var fDisks = new ProfileDisk2Page(mGame);
+         returningFrom = "ProfileDiskPage";
+         await Navigation.PushAsync(fDisks);
 
       }
 
@@ -904,13 +915,54 @@ namespace BcxbXf
       {
 
       }
+
+      private void OnCanvasViewFld_PaintSurface(object sender, SKPaintSurfaceEventArgs args)
+      {
+         Debug.WriteLine("------------------ In OnCanvasViewFld_PaintSurface");
+         if (mGame?.t is null) {
+            Debug.WriteLine("------------------ mGame.t is null");
+            return;
+         }
+         SKImageInfo info = args.Info;
+         SKSurface surface = args.Surface;
+         SKCanvas canvas = surface.Canvas;
+
+         canvas.Clear();
+         CGame g = mGame;
+
+         float x = info.Width / 2f;
+         GProfileDisk disk1 = new GProfileDisk(x, x * 0.7f, x * 0.6f, g.fpara, args) {
+            DiceRoll = g.diceRollFielding,
+            ProfileLabel = g.fpara.fielderName + " fielding..."
+         };
+
+         string[] aText = g.fpara.description.Split('/');
+         disk1.SubLabel1 = "Green: " + aText[0] + ", Red: " + aText[1];
+         disk1.SubLabel2 = "Fielding ability: " + g.fpara.fielderSkill;
+         //disk1.DrawFieldingLegend();
+         disk1.Draw();
+
+
+      }
+
+      private void btnBatterDisk_Clicked(object sender, EventArgs e)
+      {
+         canvasView1.IsVisible = true;
+         canvasViewFld.IsVisible = false;
+      }
+
+      private void btnFieldingDisk_Clicked(object sender, EventArgs e)
+      {
+         canvasView1.IsVisible = false;
+         canvasViewFld.IsVisible = true;
+      }
+
       async void mnuOptions_OnClick(object sender, EventArgs e)
       {
          // ----------------------------------------------------------
          fOptions = new OptionsPage(mGame, this.SpeechOn);
          returningFrom = "OptionsPage";
          await Navigation.PushAsync(fOptions);
-
       }
 
       public void OnCanvasView1PaintSurface(object sender, SKPaintSurfaceEventArgs args)
@@ -937,12 +989,15 @@ namespace BcxbXf
          CPitcher p = g.t[g.fl].pit[j];
 
          Debug.WriteLine($"-------------------- {b.bname} vs {p.pname}");
+
+
          float x = info.Width / 2f;
-         GProfileDisk disk4 = new(x, x*0.9f, x*0.6f, g.cpara, args) {
+         GProfileDisk disk4 = new(x, x*0.7f, x*0.6f, g.cpara, args) {
             DiceRoll = mGame.diceRollBatting,
             ProfileLabel = $"{b.bname} vs {p.pname}"
          };
-         disk4.Draw(0);
+         //disk4.DrawColorKey();
+         disk4.Draw();
 
       }
 

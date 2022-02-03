@@ -24,11 +24,13 @@
 
   <ItemGroup>
     <Compile Remove="Views\BoxScorePage.xaml.cs" />
+    <Compile Remove="Views\FieldingDiskPage.xaml.cs" />
     <Compile Remove="Views\ProfileDiskPage.xaml.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Remove="Views\BoxScorePage.xaml" />
+    <EmbeddedResource Remove="Views\FieldingDiskPage.xaml" />
     <EmbeddedResource Remove="Views\ProfileDiskPage.xaml" />
   </ItemGroup>
 
@@ -129,9 +131,6 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\AvailablePage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\FieldingDiskPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\LineupCardPage.xaml">

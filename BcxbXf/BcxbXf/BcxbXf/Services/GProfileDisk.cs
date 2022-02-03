@@ -92,30 +92,10 @@ namespace BCX.BCXB {
       }
 
 
-      public void Draw(int option, bool showColorKey = true) 
+      public void Draw() 
       {
          Debug.WriteLine("------------------------- In GProfileDisk.Draw");
-         float x, y, yDel = 42;
-         if (this.pcts == null) return;
-         switch (option) {
-
-            case 1: //Show color key
-               // It is batter / pitcher profilr...
-               DrawColorKey();
-               break;
-
-            case 2: //Show fielding text
-               // It is fieldeing profile...
-               y = 60;
-               x = 75; //120;
-               paintDef.TextSize = R*0.1f;
-               canvas.DrawText("This play was based on fielding ability.", x, y, paintDef);
-               canvas.DrawText("Fielders are rated 0 to 6 at each position.", x, y + yDel, paintDef);
-               break;
-
-            case 0: //Show neither
-               break;
-         }
+         if (pcts is null) return;
 
          DrawProfileDisk();
          if (diceRoll.topLevelResult != TLR.none) {
@@ -129,8 +109,8 @@ namespace BCX.BCXB {
       }
 
 
-      private void DrawProfileDisk() {
-         // ---------------------------------------------------------------
+      public void DrawProfileDisk() 
+      {
          //double a1 = 3.0 * pi / 2.0;
          float a1 = -90; // (float)(System.Math.PI / 2.0);
          float a2;
@@ -150,8 +130,8 @@ namespace BCX.BCXB {
       }
 
 
-      private void DrawSpinner() {
-      // --------------------------------------------------------------------
+      private void DrawSpinner() 
+      {
          if (pctSpinner < 0.0) return; // If negative, don't draw spinner.
 
          var linePaint = new SKPaint {
@@ -190,8 +170,8 @@ namespace BCX.BCXB {
        }
 
 
-      private SKPoint GetPoint(SKPoint p1, float a, float r) {
-      // -------------------------------------------------------
+      private SKPoint GetPoint(SKPoint p1, float a, float r) 
+      {
       // Return a point offset from p1 at angle a, length r.
          float x1 = p1.X + r * (float)Math.Cos(Rad(a));
          float y1 = p1.Y + r * (float)Math.Sin(Rad(a));
@@ -202,8 +182,8 @@ namespace BCX.BCXB {
       private float Wid(float pct) => pct * info.Width;
 
 
-      private void BCDrawOneWedge(float a1, float a2, SKColor color, string lbl) {
-         // ----------------------------------------------------------------
+      private void BCDrawOneWedge(float a1, float a2, SKColor color, string lbl) 
+      {
          var path = new SKPath();
 
          var p0 = new SKPoint(X, Y);
@@ -260,8 +240,8 @@ namespace BCX.BCXB {
       }
 
 
-      public void BCDrawRectangle(float x1, float y1, float x2, float y2, SKPaint paint) {
-   // ----------------------------------------------------------------
+      public void BCDrawRectangle(float x1, float y1, float x2, float y2, SKPaint paint) 
+      {
    // Not used???
       var path = new SKPath();
       path.AddRect(new SKRect(x1, y1, x2, y2));
@@ -270,8 +250,8 @@ namespace BCX.BCXB {
    }
 
 
-      private void WriteDiskLabel() {
-      // -----------------------------------------
+      private void WriteDiskLabel() 
+      {
          if (profileLabel == "") return;
 
          var paint = new SKPaint {
@@ -322,13 +302,24 @@ namespace BCX.BCXB {
       }
 
 
-      private void DrawColorKey(){
-       // -------------------------------------------------
+      public void DrawFieldingLegend() 
+      {
+         float x = 75, y = 60, yDel = 42;
+         paintDef.TextSize = R * 0.1f;
+         canvas.DrawText("This play was based on fielding ability.", x, y, paintDef);
+         canvas.DrawText("Fielders are rated 0 to 6 at each position.", x, y + yDel, paintDef);
+
+      }
+
+
+      public void DrawColorKey()
+      {
          var circlePaint = new SKPaint {
             StrokeWidth = 4,
             Style = SKPaintStyle.Fill,
             StrokeCap = SKStrokeCap.Round
          };
+
 
          var textPaint = new SKPaint {
             StrokeWidth = 3,
@@ -338,8 +329,9 @@ namespace BCX.BCXB {
             StrokeCap = SKStrokeCap.Round
          };
 
-         void Draw1Key(string text, float x, float y, SKColor circleColor) {
-         // ----------------------------------------------------------------
+
+         void Draw1Key(string text, float x, float y, SKColor circleColor) 
+         {
             var path = new SKPath();
             path.AddCircle(x, y, 16.0f, SKPathDirection.Clockwise);
             circlePaint.Color = circleColor;

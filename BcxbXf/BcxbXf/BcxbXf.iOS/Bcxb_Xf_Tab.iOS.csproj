@@ -11,7 +11,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>BcxbXf.iOS</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <AssemblyName>Bcxb_Xf_Tab.iOS</AssemblyName>
+    <AssemblyName>PlayByPlay</AssemblyName>
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -131,31 +131,34 @@
     <ImageAsset Include="Images.xcassets\AppIcons.appiconset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Images.xcassets\AppIcons.appiconset\Diamond2_1024_1024c.png">
+    <ImageAsset Include="Images.xcassets\AppIcons.appiconset\Diamond2_1024_1024c1.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Images.xcassets\AppIcons.appiconset\Diamond2_120_120.png">
+    <ImageAsset Include="Images.xcassets\AppIcons.appiconset\Diamond2_152_1521.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Images.xcassets\AppIcons.appiconset\Diamond2_120_1201.png">
+    <ImageAsset Include="Images.xcassets\AppIcons.appiconset\Diamond2_167_1671.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Images.xcassets\AppIcons.appiconset\Diamond2_180_180.png">
+    <ImageAsset Include="Images.xcassets\AppIcons.appiconset\Diamond2_20_201.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Images.xcassets\AppIcons.appiconset\Diamond2_40_40.png">
+    <ImageAsset Include="Images.xcassets\AppIcons.appiconset\Diamond2_29_291.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Images.xcassets\AppIcons.appiconset\Diamond2_58_58.png">
+    <ImageAsset Include="Images.xcassets\AppIcons.appiconset\Diamond2_40_401.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Images.xcassets\AppIcons.appiconset\Diamond2_60_60.png">
+    <ImageAsset Include="Images.xcassets\AppIcons.appiconset\Diamond2_40_402.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Images.xcassets\AppIcons.appiconset\Diamond2_80_80.png">
+    <ImageAsset Include="Images.xcassets\AppIcons.appiconset\Diamond2_58_581.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Images.xcassets\AppIcons.appiconset\Diamond2_87_87.png">
+    <ImageAsset Include="Images.xcassets\AppIcons.appiconset\Diamond2_76_761.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Images.xcassets\AppIcons.appiconset\Diamond2_80_801.png">
       <Visible>false</Visible>
     </ImageAsset>
     <ImageAsset Include="Images.xcassets\bat_img1a.imageset\bat_img1a.png">
@@ -197,13 +200,16 @@
     <ImageAsset Include="Images.xcassets\splash_batter.imageset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Images.xcassets\splash_batter.imageset\splashBatter1c.jpg">
-      <Visible>false</Visible>
-    </ImageAsset>
     <ImageAsset Include="Images.xcassets\splash_batter.imageset\splashBatter1c1.jpg">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Images.xcassets\splash_batter.imageset\splashBatter1c2.jpg">
+    <ImageAsset Include="Images.xcassets\splash_batter.imageset\splashBatter1c11.jpg">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Images.xcassets\splash_batter.imageset\splashBatter1c21.jpg">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Images.xcassets\splash_batter_1.imageset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
     <ImageAsset Include="Images.xcassets\zeemerix_logo.imageset\Contents.json">

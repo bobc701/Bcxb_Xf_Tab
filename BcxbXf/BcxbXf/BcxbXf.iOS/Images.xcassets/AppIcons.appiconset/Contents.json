@@ -3,101 +3,102 @@
     {
       "scale": "1x",
       "size": "20x20",
-      "idiom": "ipad"
+      "idiom": "ipad",
+      "filename": "Diamond2_20_201.png"
     },
     {
       "scale": "2x",
       "size": "20x20",
-      "idiom": "ipad"
+      "idiom": "ipad",
+      "filename": "Diamond2_40_402.png"
     },
     {
       "scale": "1x",
       "size": "29x29",
-      "idiom": "ipad"
+      "idiom": "ipad",
+      "filename": "Diamond2_29_291.png"
     },
     {
       "scale": "2x",
       "size": "29x29",
-      "idiom": "ipad"
+      "idiom": "ipad",
+      "filename": "Diamond2_58_581.png"
     },
     {
       "scale": "1x",
       "size": "40x40",
-      "idiom": "ipad"
+      "idiom": "ipad",
+      "filename": "Diamond2_40_401.png"
     },
     {
       "scale": "2x",
       "size": "40x40",
-      "idiom": "ipad"
+      "idiom": "ipad",
+      "filename": "Diamond2_80_801.png"
     },
     {
       "scale": "1x",
       "size": "76x76",
-      "idiom": "ipad"
+      "idiom": "ipad",
+      "filename": "Diamond2_76_761.png"
     },
     {
       "scale": "2x",
       "size": "76x76",
-      "idiom": "ipad"
+      "idiom": "ipad",
+      "filename": "Diamond2_152_1521.png"
     },
     {
       "scale": "2x",
       "size": "83.5x83.5",
-      "idiom": "ipad"
+      "idiom": "ipad",
+      "filename": "Diamond2_167_1671.png"
     },
     {
       "scale": "2x",
       "size": "20x20",
-      "idiom": "iphone",
-      "filename": "Diamond2_40_40.png"
+      "idiom": "iphone"
     },
     {
       "scale": "3x",
       "size": "20x20",
-      "idiom": "iphone",
-      "filename": "Diamond2_60_60.png"
+      "idiom": "iphone"
     },
     {
       "scale": "2x",
       "size": "29x29",
-      "idiom": "iphone",
-      "filename": "Diamond2_58_58.png"
+      "idiom": "iphone"
     },
     {
       "scale": "3x",
       "size": "29x29",
-      "idiom": "iphone",
-      "filename": "Diamond2_87_87.png"
+      "idiom": "iphone"
     },
     {
       "scale": "2x",
       "size": "40x40",
-      "idiom": "iphone",
-      "filename": "Diamond2_80_80.png"
+      "idiom": "iphone"
     },
     {
       "scale": "3x",
       "size": "40x40",
-      "idiom": "iphone",
-      "filename": "Diamond2_120_1201.png"
+      "idiom": "iphone"
     },
     {
       "scale": "3x",
       "size": "60x60",
-      "idiom": "iphone",
-      "filename": "Diamond2_180_180.png"
+      "idiom": "iphone"
+    },
+    {
+      "scale": "2x",
+      "size": "60x60",
+      "idiom": "iphone"
     },
     {
       "scale": "1x",
       "size": "1024x1024",
       "idiom": "ios-marketing",
-      "filename": "Diamond2_1024_1024c.png"
-    },
-    {
-      "scale": "2x",
-      "size": "60x60",
-      "idiom": "iphone",
-      "filename": "Diamond2_120_120.png"
+      "filename": "Diamond2_1024_1024c1.png"
     }
   ],
   "properties": {},
