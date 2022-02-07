@@ -29,6 +29,7 @@
                 Text="Use MLB Teams" 
                 Clicked="btnRealTeams_Clicked"
                 Style="{StaticResource ButtonStyleMain}" 
+                WidthRequest="400" HorizontalOptions="Center"
                 Margin="20,10,40,0"
             />
             <Label
@@ -59,6 +60,7 @@ http://www.zeemerix.com/teambldr.
                 Text="Use Custom Teams" 
                 Clicked="btnCustomTeams_Clicked"
                 Style="{StaticResource ButtonStyleMain}" 
+                WidthRequest="400" HorizontalOptions="Center"
                 Margin="20,10,40,0"
              />
       </Grid>

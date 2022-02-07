@@ -14,7 +14,7 @@ namespace BcxbXf.Models {
       private CGame _mGame;
       private string _VisName = "Visitor", _HomeName = "Home";
 
-      private CBatBoxSet _bsTot = new() { boxName = "Total" };
+      //private CBatBoxSet _bsTot = new() { boxName = "Total" };
       private ObservableCollection<CBatBoxSet> batterBox;
       private ObservableCollection<CPitBoxSet> pitcherBox;
 
@@ -47,7 +47,7 @@ namespace BcxbXf.Models {
 
          // Batter box...
          Debug.WriteLine($"In Rebuild: Starting batters...");
-         _bsTot.Zero();
+         //_bsTot.Zero();
          batterBox.Clear();
          for (int i = 1; i <= CGame.SZ_BAT-1; i++) {
             Debug.WriteLine($"In Rebuild({side}), Batter {i}");
@@ -55,9 +55,9 @@ namespace BcxbXf.Models {
             if (bx == 0) break;
             bat = g.t[side].bat[bx];
             batterBox.Add(bat.bs);
-            _bsTot.AddTo(bat.bs); 
+            //_bsTot.AddTo(bat.bs); 
          }
-         batterBox.Add(_bsTot); //This is the totals row.
+         batterBox.Add(g.t[side].btot); //This is the totals row.
 
          // Pitcher box...
          pitcherBox.Clear();
