@@ -119,7 +119,7 @@ namespace BcxbXf
 
                      txtResults.Text =
                      "\nTap 'Mng' above to change starting lineups." +
-                     "\nWhen done, tap 'Start' below." +
+                     "\nWhen done, tap 'BATTER UP!' below." +
                      "\n\nMake sure phone is not in silent mode" +
                      "\nto hear audio play-by-play.";
                      Activity2.IsRunning = false;
@@ -601,7 +601,7 @@ namespace BcxbXf
          // fielding profile disk...
             if (IsFieldingPlay) {
                btnFieldingDisk.IsEnabled = true;
-               canvasView1.InvalidateSurface();
+               canvasViewFld.InvalidateSurface();
                canvasView1.IsVisible = false;
                canvasViewFld.IsVisible = true;
             }
@@ -823,7 +823,7 @@ namespace BcxbXf
                cmdManageV.IsEnabled = true;
                cmdPlays.IsEnabled = cmdOptions.IsEnabled = false;
                btnGo.IsEnabled = true;
-               btnGo.Text = "START";
+               btnGo.Text = "BATTER UP!";
                btnProfileDisks.IsEnabled = false;
                break;
 

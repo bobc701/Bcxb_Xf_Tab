@@ -486,7 +486,7 @@
                      IsVisible="true" >
 
                      <ListView.Header>
-                        <Grid Padding="0" RowSpacing="0" BackgroundColor="Black" HeightRequest="40">
+                        <Grid Padding="0" RowSpacing="0" BackgroundColor="Black" >
                            <Grid.ColumnDefinitions>
                               <ColumnDefinition Width="5*" />
                               <ColumnDefinition Width="*" />
@@ -497,11 +497,11 @@
                               <ColumnDefinition Width="*" />
                               <ColumnDefinition Width="*" />
                            </Grid.ColumnDefinitions>
-                           <Grid.RowDefinitions>
+                           <!--<Grid.RowDefinitions>
                               <RowDefinition Height="30" />
-                           </Grid.RowDefinitions>
+                           </Grid.RowDefinitions>-->
 
-                           <Label Margin="0,0,0,0" Text="Batting" HorizontalOptions="Start" Grid.Column="0" FontAttributes="Bold" Style="{StaticResource LabelItem1}" />
+                           <Label Margin="0,0,0,0" Text="Batting" HorizontalOptions="Start" Grid.Column="0" FontAttributes="Bold" HeightRequest="30" Style="{StaticResource LabelItem1}" />
                            <Label Margin="0,0,0,0" Text="ab" Grid.Column="1" FontAttributes="Bold" Style="{StaticResource LabelItem1}" />
                            <Label Margin="0,0,0,0" Text="r"  Grid.Column="2" FontAttributes="Bold" Style="{StaticResource LabelItem1}" />
                            <Label Margin="0,0,0,0" Text="h" Grid.Column="3" FontAttributes="Bold" Style="{StaticResource LabelItem1}" />
@@ -578,13 +578,13 @@
                               <!--<ColumnDefinition Width="*" />-->
                            </Grid.ColumnDefinitions>
 
-                           <Label Margin="0,0,0,0" Text="Pitching" HorizontalOptions="Start" Grid.Column="0" HeightRequest="30" Style="{StaticResource LabelItem1}" />
-                           <Label Margin="0,0,0,0" Text="ip" Grid.Column="1" Style="{StaticResource LabelItem1}" />
-                           <Label Margin="0,0,0,0" Text="h" Grid.Column="2" Style="{StaticResource LabelItem1}" />
-                           <Label Margin="0,0,0,0" Text="r" Grid.Column="3" Style="{StaticResource LabelItem1}" />
-                           <Label Margin="0,0,0,0" Text="er" Grid.Column="4" Style="{StaticResource LabelItem1}" />
-                           <Label Margin="0,0,0,0" Text="so" Grid.Column="5" Style="{StaticResource LabelItem1}" />
-                           <Label Margin="0,0,0,0" Text="bb" Grid.Column="6" Style="{StaticResource LabelItem1}" />
+                           <Label Margin="0,0,0,0" Text="Pitching" HorizontalOptions="Start" Grid.Column="0" FontAttributes="Bold" HeightRequest="30" Style="{StaticResource LabelItem1}" />
+                           <Label Margin="0,0,0,0" Text="ip" Grid.Column="1" FontAttributes="Bold" Style="{StaticResource LabelItem1}" />
+                           <Label Margin="0,0,0,0" Text="h" Grid.Column="2" FontAttributes="Bold" Style="{StaticResource LabelItem1}" />
+                           <Label Margin="0,0,0,0" Text="r" Grid.Column="3" FontAttributes="Bold" Style="{StaticResource LabelItem1}" />
+                           <Label Margin="0,0,0,0" Text="er" Grid.Column="4" FontAttributes="Bold" Style="{StaticResource LabelItem1}" />
+                           <Label Margin="0,0,0,0" Text="so" Grid.Column="5" FontAttributes="Bold" Style="{StaticResource LabelItem1}" />
+                           <Label Margin="0,0,0,0" Text="bb" Grid.Column="6" FontAttributes="Bold" Style="{StaticResource LabelItem1}" />
                            <!--<Label Margin="0,0,0,0" Text="hr"  TextColor="LightGray"  Grid.Column="7" Style="{StaticResource LabelItem1}" />-->
                         </Grid>
 
@@ -653,13 +653,13 @@
                               <ColumnDefinition Width="*" />
                            </Grid.ColumnDefinitions>
 
-                           <Label Margin="0,0,0,0" Text="Pitching" HorizontalOptions="Start" Grid.Column="0" HeightRequest="30" Style="{StaticResource LabelItem1}" />
-                           <Label Margin="0,0,0,0" Text="ip" Grid.Column="1" Style="{StaticResource LabelItem1}" />
-                           <Label Margin="0,0,0,0" Text="h" Grid.Column="2" Style="{StaticResource LabelItem1}" />
-                           <Label Margin="0,0,0,0" Text="r" Grid.Column="3" Style="{StaticResource LabelItem1}" />
-                           <Label Margin="0,0,0,0" Text="er" Grid.Column="4" Style="{StaticResource LabelItem1}" />
-                           <Label Margin="0,0,0,0" Text="so" Grid.Column="5" Style="{StaticResource LabelItem1}" />
-                           <Label Margin="0,0,0,0" Text="bb" Grid.Column="6" Style="{StaticResource LabelItem1}" />
+                           <Label Margin="0,0,0,0" Text="Pitching" HorizontalOptions="Start" Grid.Column="0" HeightRequest="30" FontAttributes="Bold" Style="{StaticResource LabelItem1}" />
+                           <Label Margin="0,0,0,0" Text="ip" Grid.Column="1" FontAttributes="Bold" Style="{StaticResource LabelItem1}" />
+                           <Label Margin="0,0,0,0" Text="h" Grid.Column="2" FontAttributes="Bold" Style="{StaticResource LabelItem1}" />
+                           <Label Margin="0,0,0,0" Text="r" Grid.Column="3" FontAttributes="Bold" Style="{StaticResource LabelItem1}" />
+                           <Label Margin="0,0,0,0" Text="er" Grid.Column="4" FontAttributes="Bold" Style="{StaticResource LabelItem1}" />
+                           <Label Margin="0,0,0,0" Text="so" Grid.Column="5" FontAttributes="Bold" Style="{StaticResource LabelItem1}" />
+                           <Label Margin="0,0,0,0" Text="bb" Grid.Column="6" FontAttributes="Bold" Style="{StaticResource LabelItem1}" />
                            <!--<Label Margin="0,0,0,0" Text="hr"  TextColor="LightGray"  Grid.Column="7" Style="{StaticResource LabelItem1}" />-->
                         </Grid>
 
@@ -766,7 +766,7 @@
 
          <Button Grid.Row="0" Grid.Column="0" 
             x:Name="btnGo" 
-            Text="START" 
+            Text="BATTER UP!" 
             FontSize="32" FontAttributes="Bold"
             Clicked="btnGo_Clicked" 
             Margin="0" Padding="0,0,0,0" 
