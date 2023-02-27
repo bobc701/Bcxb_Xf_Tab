@@ -1,3 +1,14 @@
+01/31/23
+--------
+Added 'LatestAvailableYear1' to Resources1.resx
+Replaced references to '2022'
+Tested with 2022 data.
+
+11/30'22
+--------
+Changes for year 2022
+-- Year '2021' changed to '2022' in several places.
+
 2/25'22
 -------
 Changes for year 2021

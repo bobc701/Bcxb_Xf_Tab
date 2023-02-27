@@ -11,6 +11,7 @@ using BCX.BCXCommon;
 using BcxbDataAccess;
 
 using System.Linq;
+using Bcxb_Xf_Tab.Resources;
 
 namespace BcxbXf.Models {
 
@@ -30,9 +31,10 @@ namespace BcxbXf.Models {
 
          //TwoSource.Add(new GroupModel { GroupName = "enterprise", Property = enterprise });
          //TwoSource.Add(new GroupModel { GroupName = "countries", Property = countries });
-
+         
          TwoSource.Add(new LeftComponent { Name = "Year", RightComponentList = new ObservableCollection<CTeamRecord>() });
-         for (int y = 2021; y >= 1901; y--) {
+         int latestYr = int.Parse(Resource1.LatestAvailableYear1);
+         for (int y = latestYr; y >= 1901; y--) {
             TwoSource.Add(new LeftComponent { 
                Name = y.ToString(), 
                RightComponentList = new ObservableCollection<CTeamRecord>() 
@@ -41,7 +43,7 @@ namespace BcxbXf.Models {
          try {
             //throw new Exception("Don't forget to remove this exception"); //For testing
             Debug.WriteLine("Will call GetTeamListForYearFromCache in InitializationData"); //3000.04
-            var list0 = await DataAccess.GetTeamListForYearFromCache(2021);
+            var list0 = await DataAccess.GetTeamListForYearFromCache(latestYr);
             TwoSource[0].RightComponentList = new ObservableCollection<CTeamRecord>(list0); 
          }
          catch (Exception ex) {

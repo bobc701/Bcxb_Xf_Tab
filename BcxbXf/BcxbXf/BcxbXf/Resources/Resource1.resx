@@ -121,4 +121,7 @@
     <value>Use custom teams made up of actual MLB players from any mix of years and MLB teams.
 To create custom teams, use the Zeemerix Custom Team Builder at: www.zeemerix.com/teambldr.</value>
   </data>
+  <data name="LatestAvailableYear1" xml:space="preserve">
+    <value>2022</value>
+  </data>
 </root>

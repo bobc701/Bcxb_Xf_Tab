@@ -19,7 +19,7 @@ namespace Bcxb_Xf_Tab.Resources {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Resource1 {
@@ -67,6 +67,15 @@ namespace Bcxb_Xf_Tab.Resources {
         public static string CustTeamsString1 {
             get {
                 return ResourceManager.GetString("CustTeamsString1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 2022.
+        /// </summary>
+        public static string LatestAvailableYear1 {
+            get {
+                return ResourceManager.GetString("LatestAvailableYear1", resourceCulture);
             }
         }
     }

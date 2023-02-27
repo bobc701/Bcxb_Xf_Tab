@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:resources="Resources.Resource1.Resx"
              x:Class="BcxbXf.Views.PickTeamsPrepPage"
              Title="New Game"
     >
@@ -20,7 +19,7 @@
             />
             <Label 
                 Grid.Row="2"
-                Text="Use any NL or AL teams from 1901 to 2021"
+                Text="Use any NL or AL teams from 1901 to 2022"
                 HorizontalOptions="Center" 
             />
             <Button 
@@ -48,7 +47,7 @@
                 Padding="16,0,16,0"
                 HorizontalOptions="Center">
                 <Label.Text>
-Use custom teams made up of actual MLB players from any mix of years and MLB teams from 1901 to 2021.
+Use custom teams made up of actual MLB players from any mix of years and MLB teams from 1901 to 2022}.
 
 To create your custom teams, use the Zeemerix Custom Team Builder at:
 http://www.zeemerix.com/teambldr.
@@ -66,3 +65,5 @@ http://www.zeemerix.com/teambldr.
       </Grid>
     </ContentPage.Content>
 </ContentPage>
+
+

@@ -12,6 +12,7 @@ using UIKit;
 
 using BCX.BCXCommon;
 using BcxbDataAccess;
+using Bcxb_Xf_Tab.Resources;
 
 namespace BcxbXf.iOS
 {
@@ -41,12 +42,13 @@ namespace BcxbXf.iOS
 
       private async Task PrimeTeamCache() { // #3000.03
          // ---------------------------------------------------------
-         // This routine will do an initial fill of the teamCache using 2000-2021,
+         // This routine will do an initial fill of the teamCache using 2000-2022 (oe latest year),
          // while the splash screen is being displayed.
          // If no internet, this will fail and do nothing.
 
          try {
-            var url = new Uri(DataAccess.client.BaseAddress, $"{DataAccess.WinhostEndPoint}api/team-list/2010/2021");
+            string latestYr = Resource1.LatestAvailableYear1;
+            var url = new Uri(DataAccess.client.BaseAddress, $"{DataAccess.WinhostEndPoint}api/team-list/2010/{latestYr}");
 
             List<CTeamRecord> yearList10;
             HttpResponseMessage response = await DataAccess.client.GetAsync(url.ToString());
